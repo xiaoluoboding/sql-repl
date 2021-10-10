@@ -1,0 +1,25 @@
+{
+  "apps": [
+    {
+      "name": "pm2-http",
+      "cwd": "/app",
+      "script": "dist/app.js",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss",
+      "error_file": "/export/Logs/pm2-error.log",
+      "out_file": "/export/Logs/pm2.log",
+      "pid_file": "pm2.pid",
+      "instances": 1,
+      "instance_var": "INSTANCE_ID",
+      "min_uptime": "200s",
+      "max_restarts": 10,
+      "max_memory_restart": "1024M",
+      "cron_restart": "3 0 * * *",
+      "watch": false,
+      "merge_logs": false,
+      "exec_interpreter": "node",
+      "exec_mode": "cluster",
+      "autorestart": true,
+      "vizion": false
+    }
+  ]
+}
