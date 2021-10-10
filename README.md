@@ -10,8 +10,8 @@ Just a SQL REPL for web.
 
 SQL REPL now support connecting to the following databases:
 
- [x] SQLite
- [ ] MySQL
+* SQLite
+* MySQL (WIP)
 
 ## 💻 Tech Stack
 
@@ -50,6 +50,14 @@ yarn dev:server
 npm run dev:client
 # or
 yarn dev:client
+```
+
+### Serve the APP
+
+```bash
+npm start
+# or
+yarn start
 ```
 
 It will be running at: [http://localhost:3000/](http://localhost:3000/)

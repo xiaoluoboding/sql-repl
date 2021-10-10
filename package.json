@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Just a SQL REPL for web.",
   "scripts": {
+    "start": "run-p dev:*",
     "dev:server": "npm run dev --prefix server",
     "dev:client": "npm run dev --prefix client"
   },
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/xiaoluoboding/sql-repl/issues"
   },
-  "homepage": "https://github.com/xiaoluoboding/sql-repl#readme"
+  "homepage": "https://github.com/xiaoluoboding/sql-repl#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }
