@@ -3,6 +3,12 @@ import { request } from './request'
 
 const BASE_URL = '/api/v1/sqlite'
 
+export const connectDB = async (params: string) => {
+  const url = `${BASE_URL}/connectDB/${params}`
+  const res = await request(url)
+  return res.data
+}
+
 export const getTableColumns = async (params: string) => {
   const url = `${BASE_URL}/getTableColumns/${params}`
   const res = await request(url)

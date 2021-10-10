@@ -13,7 +13,6 @@
     "@codemirror/lang-sql": "^0.19.3",
     "@codemirror/state": "^0.19.2",
     "@vueuse/core": "^6.5.3",
-    "codemirror": "^5.63.0",
     "naive-ui": "^2.19.3",
     "sequelize": "^6.6.5",
     "splitpanes": "^3.0.6",

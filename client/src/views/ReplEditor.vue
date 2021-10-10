@@ -1,23 +1,31 @@
 <template>
   <div class="repl-editor">
     <div class="repl-editor--codemirror">
-      <Codemirror v-model="sql" />
+      <Codemirror v-model="sqlQueries" />
     </div>
     <div class="repl-editor--actions">
       <n-button size="small">Save</n-button>
-      <n-button size="small" type="primary">Run</n-button>
+      <n-button size="small" type="primary" @click="handleRunSQL">Run</n-button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { nextTick } from 'vue'
+
 import Codemirror from '../components/codemirror/index.vue'
-import { injectStrict, SQL_QUERIES } from '../types'
+import { injectStrict, SQL_QUERIES, DATABASE_INFO } from '../types'
 
-const sql = injectStrict(SQL_QUERIES)
+const sqlQueries = injectStrict(SQL_QUERIES)
+const databaseInfo = injectStrict(DATABASE_INFO)
 
-sql.value = `select * from employees e
+sqlQueries.value = `select * from employees e
 where e.salary > 10000`
+
+const handleRunSQL = () => {
+  databaseInfo.value.manualRun = true
+  nextTick(() => (databaseInfo.value.manualRun = false))
+}
 </script>
 
 <style lang="scss">

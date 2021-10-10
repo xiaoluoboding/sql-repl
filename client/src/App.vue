@@ -34,12 +34,13 @@ import ReplEditor from './views/ReplEditor.vue'
 import TableView from './views/TableView.vue'
 
 import { useDark } from './composables/useDark'
-import { IS_DARKMODE, SQL_QUERIES } from './types'
+import { IS_DARKMODE, SQL_QUERIES, DATABASE_INFO } from './types'
 
 const isDark = useDark()
 const theme = computed(() => isDark.value ? darkTheme : null)
 provide(IS_DARKMODE, isDark)
 provide(SQL_QUERIES, ref(''))
+provide(DATABASE_INFO, ref({}))
 
 const themeOverrides = {
   common: {

@@ -14,7 +14,6 @@ specifiers:
   '@types/sql.js': ^1.4.3
   '@vitejs/plugin-vue': ^1.9.0
   '@vueuse/core': ^6.5.3
-  codemirror: ^5.63.0
   naive-ui: ^2.19.3
   sass: ^1.42.1
   sequelize: ^6.6.5
@@ -35,7 +34,6 @@ dependencies:
   '@codemirror/lang-sql': 0.19.3
   '@codemirror/state': 0.19.2
   '@vueuse/core': 6.5.3_vue@3.2.20
-  codemirror: 5.63.1
   naive-ui: 2.19.5_vue@3.2.20
   sequelize: 6.6.5
   splitpanes: 3.0.6
@@ -785,10 +783,6 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
-
-  /codemirror/5.63.1:
-    resolution: {integrity: sha512-baivaNZreZOGh1/tYyTvCupC9NeWk7qlZeGUDi4nFKj/J0JU8FYKZND4QqLw70P7HOttlCt4JJAOj9GoIhHEkA==}
-    dev: false
 
   /color-convert/2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}

@@ -18,14 +18,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { debouncedWatch } from '@vueuse/core'
 
 import { AnyRecord } from '../types/index'
-import { getTableColumns, execSQL } from '../utils/services'
-import { injectStrict, SQL_QUERIES } from '../types'
+import { connectDB, getTableColumns, execSQL } from '../utils/services'
+import { injectStrict, SQL_QUERIES, DATABASE_INFO } from '../types'
 
-const sql = injectStrict(SQL_QUERIES)
+const sqlQueries = injectStrict(SQL_QUERIES)
+const databaseInfo = injectStrict(DATABASE_INFO)
+const activeTable = computed(() => databaseInfo.value.activeTable || 'employees')
 
 const tableviewRef = ref()
 const data = ref<AnyRecord[]>([])
@@ -45,10 +47,24 @@ const pagination = ref<AnyRecord>({
 })
 const tableMaxHeight = ref(0)
 
+/**
+ * Connected with Databse
+ */
+const connectDatabase = async () => {
+  if (databaseInfo.value.connected) {
+    console.warn('Database already connected')
+    return
+  }
+  const res = await connectDB(activeTable.value)
+  databaseInfo.value.connected = !!res
+}
+
 // init the table views without data
-const initTableColumns = async (tableName: string = 'employees') => {
-  const tableColumns = await getTableColumns(encodeURIComponent(`select * from ${tableName}`))
+const initTableColumns = async (tableName: string) => {
+  const params = encodeURIComponent(`select * from ${tableName}`)
+  const tableColumns = await getTableColumns(params)
   console.log(tableColumns)
+  // TODO sorter map with column type
   columns.value = tableColumns.map((item: any) => {
     return {
       title: item.column,
@@ -60,7 +76,7 @@ const initTableColumns = async (tableName: string = 'employees') => {
 
 // query the new sql
 const query = async () => {
-  const params = encodeURIComponent(sql.value)
+  const params = encodeURIComponent(sqlQueries.value)
   const res = await execSQL(params)
   return res
 }
@@ -71,7 +87,7 @@ const getTableData = async () => {
 }
 
 debouncedWatch(
-  () => sql.value,
+  () => databaseInfo.value.manualRun,
   (newVal) => {
     getTableData()
   },
@@ -83,7 +99,8 @@ debouncedWatch(
 )
 
 onMounted(async () => {
-  await initTableColumns()
+  await connectDatabase()
+  await initTableColumns(activeTable.value)
   await getTableData()
   tableMaxHeight.value = tableviewRef.value.offsetHeight - 28
 })
