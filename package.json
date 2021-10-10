@@ -1,0 +1,19 @@
+{
+  "name": "sql-repl",
+  "version": "0.1.0",
+  "description": "Just a SQL REPL for web.",
+  "scripts": {
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiaoluoboding/sql-repl.git"
+  },
+  "author": "xiaoluoboding<xiaolubooding@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xiaoluoboding/sql-repl/issues"
+  },
+  "homepage": "https://github.com/xiaoluoboding/sql-repl#readme"
+}
