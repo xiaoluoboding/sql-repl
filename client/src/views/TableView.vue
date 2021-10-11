@@ -18,12 +18,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { debouncedWatch } from '@vueuse/core'
 
-import { AnyRecord } from '../types/index'
 import { connectDB, getTableColumns, execSQL } from '../utils/services'
-import { injectStrict, SQL_QUERIES, DATABASE_INFO } from '../types'
+import { injectStrict, SQL_QUERIES, DATABASE_INFO, AnyRecord } from '../types'
+import { useShortcut } from '../composables/useShortcut'
 
 const sqlQueries = injectStrict(SQL_QUERIES)
 const databaseInfo = injectStrict(DATABASE_INFO)
@@ -97,6 +97,13 @@ debouncedWatch(
     debounce: 333
   }
 )
+
+useShortcut({
+  '⌘+e, ctrl+e': () => getTableData(),
+  '⌘+s, ctrl+s': () => {
+    console.log('⌘+s')
+  }
+})
 
 onMounted(async () => {
   await connectDatabase()
