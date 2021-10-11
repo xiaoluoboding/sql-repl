@@ -14,7 +14,6 @@ export const DATABASE_INFO: InjectionKey<Ref<DATABASE_INFO>> = Symbol()
 export const injectStrict = <T>(key: InjectionKey<T>, fallback?: T) => {
   const resolved = inject(key, fallback)
   if (!resolved) {
-    console.log(key)
     throw new Error(`Could not resolve ${key.description}`)
   }
 

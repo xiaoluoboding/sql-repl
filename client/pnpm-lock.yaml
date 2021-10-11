@@ -3,9 +3,13 @@ lockfileVersion: 5.3
 specifiers:
   '@codemirror/autocomplete': ^0.19.3
   '@codemirror/basic-setup': ^0.19.0
+  '@codemirror/commands': ^0.19.5
+  '@codemirror/highlight': ^0.19.6
   '@codemirror/history': ^0.19.0
   '@codemirror/lang-sql': ^0.19.3
   '@codemirror/state': ^0.19.2
+  '@codemirror/theme-one-dark': ^0.19.0
+  '@codemirror/view': ^0.19.9
   '@iconify/json': ^1.1.407
   '@intlify/vite-plugin-vue-i18n': ^2.4.0
   '@types/codemirror': ^5.60.3
@@ -34,9 +38,13 @@ specifiers:
 dependencies:
   '@codemirror/autocomplete': 0.19.3
   '@codemirror/basic-setup': 0.19.0
+  '@codemirror/commands': 0.19.5
+  '@codemirror/highlight': 0.19.6
   '@codemirror/history': 0.19.0
   '@codemirror/lang-sql': 0.19.3
   '@codemirror/state': 0.19.2
+  '@codemirror/theme-one-dark': 0.19.0
+  '@codemirror/view': 0.19.9
   '@vueuse/core': 6.5.3_vue@3.2.20
   keymaster: 1.6.2
   naive-ui: 2.19.5_vue@3.2.20
@@ -265,6 +273,14 @@ packages:
 
   /@codemirror/text/0.19.4:
     resolution: {integrity: sha512-Msd1ImS+Mmref28+oyoOrBwqjH4lbCVO/5ol2jRaCEYH7+KaMocxFADZomPLnMPgDW6Gc4mu/K2lj8IjAOFdTA==}
+    dev: false
+
+  /@codemirror/theme-one-dark/0.19.0:
+    resolution: {integrity: sha512-Xlk68ARreanFveE+KvZJY4HxecNr+VKDOR61O8l3kzlQ0qvxNXA0KAp1xu4p32pA9jzJqJi5haIgdfWSZogXZg==}
+    dependencies:
+      '@codemirror/highlight': 0.19.6
+      '@codemirror/state': 0.19.2
+      '@codemirror/view': 0.19.9
     dev: false
 
   /@codemirror/tooltip/0.19.2:
