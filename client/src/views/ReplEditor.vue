@@ -4,8 +4,8 @@
       <Codemirror v-model="sqlQueries" />
     </div>
     <div class="repl-editor--actions">
-      <n-button size="small">Save</n-button>
-      <n-button size="small" type="primary" @click="handleRunSQL">Run</n-button>
+      <n-button size="small">{{$t('common.save')}}</n-button>
+      <n-button size="small" type="primary" @click="handleRunSQL">{{$t('common.run')}}</n-button>
     </div>
   </div>
 </template>

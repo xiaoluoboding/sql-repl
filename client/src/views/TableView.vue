@@ -8,7 +8,7 @@
       数据连接
     </n-button> -->
     <n-data-table
-      size="small"
+      size="mini"
       :columns="columns"
       :data="data"
       :pagination="pagination"

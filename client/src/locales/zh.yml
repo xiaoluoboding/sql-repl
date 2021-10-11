@@ -1,0 +1,15 @@
+common:
+  about: 关于
+  back: 返回
+  go: 确定
+  home: 首页
+  open: 打开
+  save: 保存
+  run: 运行
+button:
+  toggle_dark: 切换深色模式
+  toggle_langs: 切换语言
+  options: 应用设置
+  createConnection: 创建数据连接
+home:
+  app_name: SQL REPL

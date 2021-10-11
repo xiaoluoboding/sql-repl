@@ -15,9 +15,12 @@
         <button class="actions--btn download" >
           <carbon-download class="h-5 w-5" />
         </button>
-        <button class="actions--btn darkmode" @click="isDarkmode = !isDarkmode">
+        <button class="actions--btn darkmode" :title="$t('button.toggle_dark')" @click="isDarkmode = !isDarkmode">
           <carbon-moon class="h-5 w-5" v-if="isDarkmode" />
           <carbon-sun class="h-5 w-5" v-else />
+        </button>
+        <button class="actions--btn langages" :title="$t('button.toggle_langs')" @click="e => toggleLocales()">
+          <carbon-language class="h-5 w-5" />
         </button>
         <button class="actions--btn settings" @click="isShowSettings = true">
           <carbon-settings class="h-5 w-5" />
@@ -29,10 +32,19 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 import { injectStrict, IS_DARKMODE } from '../types'
 
 const isDarkmode = injectStrict(IS_DARKMODE)
 const isShowSettings = ref(false)
+const { availableLocales, locale } = useI18n()
+
+const toggleLocales = () => {
+  // change to some real logic
+  const locales = availableLocales
+  locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+}
 </script>
 
 <style lang="scss" scoped>

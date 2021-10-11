@@ -1,0 +1,15 @@
+common:
+  about: About
+  back: Back
+  go: GO
+  home: Home
+  open: Open
+  save: Save
+  run: Run
+button:
+  toggle_dark: Toggle dark mode
+  toggle_langs: Change languages
+  options: App Options
+  createConnection: Create Connection
+home:
+  app_name: SQL REPL
