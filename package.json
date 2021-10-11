@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "description": "Just a SQL REPL for web.",
   "scripts": {
-    "start": "run-p dev:*",
+    "install:client": "cd client && pnpm install",
+    "install:server": "cd server && pnpm install",
+    "postinstall": "run-p install:*",
     "dev:server": "npm run dev --prefix server",
-    "dev:client": "npm run dev --prefix client"
+    "dev:client": "npm run dev --prefix client",
+    "start": "run-p dev:*"
   },
   "repository": {
     "type": "git",

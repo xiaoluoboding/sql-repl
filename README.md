@@ -34,30 +34,20 @@ SQL REPL now support connecting to the following databases:
 
 ## 📖 Usage
 
-### Start the server
+### Install
 
-The server that provide RESTFul API for sql repl client.
+> I perferred to use `pnpm` instead `yarn` or `npm`.
 
-```bash
-npm run dev:server
-# or
-yarn dev:server
-```
-
-### Start the client
+Install both [client](./client/package.json) & [server](./server/package.json) dependencies with one script:
 
 ```bash
-npm run dev:client
-# or
-yarn dev:client
+pnpm install
 ```
 
 ### Serve the APP
 
 ```bash
-npm start
-# or
-yarn start
+pnpm start
 ```
 
 It will be running at: [http://localhost:3000/](http://localhost:3000/)
