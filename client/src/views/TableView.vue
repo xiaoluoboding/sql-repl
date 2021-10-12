@@ -8,7 +8,7 @@
       数据连接
     </n-button> -->
     <n-data-table
-      size="small"
+      size="mini"
       :columns="columns"
       :data="data"
       :pagination="pagination"
@@ -18,8 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { debouncedWatch } from '@vueuse/core'
+import { useNotification } from 'naive-ui'
 
 import { connectDB, getTableColumns, execSQL } from '../utils/services'
 import { injectStrict, SQL_QUERIES, DATABASE_INFO, AnyRecord } from '../types'
@@ -34,7 +35,7 @@ const data = ref<AnyRecord[]>([])
 const columns = ref<AnyRecord[]>([])
 const pagination = ref<AnyRecord>({
   page: 1,
-  pageSize: 10,
+  pageSize: 20,
   showSizePicker: true,
   pageSizes: [10, 20, 50, 100, 200],
   onChange: (page: any) => {
@@ -63,7 +64,8 @@ const connectDatabase = async () => {
 const initTableColumns = async (tableName: string) => {
   const params = encodeURIComponent(`select * from ${tableName}`)
   const tableColumns = await getTableColumns(params)
-  console.log(tableColumns)
+  databaseInfo.value.activeTable = tableName
+  databaseInfo.value.tableColumns = tableColumns
   // TODO sorter map with column type
   columns.value = tableColumns.map((item: any) => {
     return {
@@ -81,6 +83,8 @@ const query = async () => {
   return res
 }
 
+const notification = useNotification()
+
 const getTableData = async () => {
   data.value = await query()
   pagination.value.page = 1
@@ -88,9 +92,7 @@ const getTableData = async () => {
 
 debouncedWatch(
   () => databaseInfo.value.manualRun,
-  (newVal) => {
-    getTableData()
-  },
+  getTableData,
   {
     immediate: true,
     deep: true,
@@ -99,7 +101,14 @@ debouncedWatch(
 )
 
 useShortcut({
-  '⌘+e, ctrl+e': () => getTableData(),
+  '⌘+e, ctrl+e': async () => {
+    await getTableData()
+    notification.success({
+      title: 'Info',
+      content: 'The Queries Runs Successfully!',
+      duration: 2000
+    })
+  },
   '⌘+s, ctrl+s': () => {
     console.log('⌘+s')
   }

@@ -9,12 +9,12 @@
     </h1>
     <div class="links flex" text="gray-900 dark:blue-gray-100">
       <div class="actions flex items-center">
-        <button class="actions--btn share" >
+        <!-- <button class="actions--btn share" >
           <carbon-share class="h-5 w-5" />
         </button>
         <button class="actions--btn download" >
           <carbon-download class="h-5 w-5" />
-        </button>
+        </button> -->
         <button class="actions--btn darkmode" :title="$t('button.toggle_dark')" @click="isDarkmode = !isDarkmode">
           <carbon-moon class="h-5 w-5" v-if="isDarkmode" />
           <carbon-sun class="h-5 w-5" v-else />
@@ -24,6 +24,11 @@
         </button>
         <button class="actions--btn settings" @click="isShowSettings = true">
           <carbon-settings class="h-5 w-5" />
+        </button>
+        <button class="actions--btn download">
+          <a href="https://github.com/xiaoluoboding/sql-repl" target="_blank">
+            <simple-icons-github class="h-5 w-5" />
+          </a>
         </button>
       </div>
     </div>
@@ -59,7 +64,7 @@ const toggleLocales = () => {
 .actions--btn {
   @apply my-0 mx-1 p-2;
   @apply hover:bg-gray-100 hover:dark:bg-true-gray-800;
-  @apply rounded-md;
+  @apply rounded-md outline-transparent;
   @apply h-9;
 }
 </style>

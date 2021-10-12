@@ -9,11 +9,11 @@ import {
   NInput,
   NTag,
   NPopconfirm,
-  NTimeline,
-  NTimelineItem,
   NUpload,
   NUploadDragger,
-  NDataTable
+  NDataTable,
+  NTree,
+  NNotificationProvider
 } from 'naive-ui'
 
 const naive = create({
@@ -26,12 +26,12 @@ const naive = create({
     NInput,
     NTag,
     NPopconfirm,
-    NTimeline,
-    NTimelineItem,
     NUpload,
     NUploadDragger,
-    NDataTable
-  ]
+    NDataTable,
+    NTree,
+    NNotificationProvider,
+  ],
 })
 
 const install = (app: App) => {

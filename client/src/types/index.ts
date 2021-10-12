@@ -1,12 +1,14 @@
 import { InjectionKey, Ref, inject } from 'vue'
 
+export type AnyRecord = Record<string, any>
+
 export interface DATABASE_INFO {
   activeTable: string
   connected: boolean
   manualRun: boolean
+  tableColumns: AnyRecord[]
 }
 
-export type AnyRecord = Record<string, any>
 export const IS_DARKMODE: InjectionKey<Ref<boolean>> = Symbol()
 export const SQL_QUERIES: InjectionKey<Ref<string>> = Symbol()
 export const DATABASE_INFO: InjectionKey<Ref<DATABASE_INFO>> = Symbol()

@@ -5,22 +5,24 @@
     :theme="theme"
     :theme-overrides="themeOverrides"
   >
-    <Header />
-    <Splitpanes class="default-theme">
-      <Pane size="25" min-size="20">
-        <Aside />
-      </Pane>
-      <Pane size="75">
-        <Splitpanes horizontal class="default-theme">
-          <Pane size="50">
-            <ReplEditor />
-          </Pane>
-          <Pane size="50">
-            <TableView />
-          </Pane>
-        </Splitpanes>
-      </Pane>
-    </Splitpanes>
+    <n-notification-provider>
+      <Header />
+      <Splitpanes class="default-theme">
+        <Pane size="20" min-size="0" max-size="30">
+          <Aside />
+        </Pane>
+        <Pane size="80">
+          <Splitpanes horizontal class="default-theme">
+            <Pane size="50">
+              <ReplEditor />
+            </Pane>
+            <Pane size="50">
+              <TableView />
+            </Pane>
+          </Splitpanes>
+        </Pane>
+      </Splitpanes>
+    </n-notification-provider>
   </NConfigProvider>
 </template>
 
@@ -68,7 +70,7 @@ body {
   --font-code: 'Source Code Pro', monospace;
   --color-branding: #3ca877;
   --color-branding-dark: #416f9c;
-  --border-color: rgba(200, 200, 200, .12);
+  --border-color: rgba(200, 200, 200, 0.2);
   @apply bg-gray-100 dark:bg-gray-900;
 }
 

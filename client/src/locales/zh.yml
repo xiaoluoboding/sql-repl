@@ -10,6 +10,7 @@ button:
   toggle_dark: 切换深色模式
   toggle_langs: 切换语言
   options: 应用设置
-  createConnection: 创建数据连接
+  create_connection: 创建数据连接
+  run_sql_queries: 执行SQL语句（⌘ + E）
 home:
   app_name: SQL REPL

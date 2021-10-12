@@ -10,6 +10,7 @@ button:
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
   options: App Options
-  createConnection: Create Connection
+  create_connection: Create Connection
+  run_sql_queries: Run SQL Queries（⌘ + E）
 home:
   app_name: SQL REPL
