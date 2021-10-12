@@ -18,17 +18,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted, h } from 'vue'
 import { debouncedWatch } from '@vueuse/core'
 import { useNotification } from 'naive-ui'
 
-import { connectDB, getTableColumns, execSQL } from '../utils/services'
-import { injectStrict, SQL_QUERIES, DATABASE_INFO, AnyRecord } from '../types'
+import { execSQL } from '../utils/services'
+import { AnyRecord } from '../types'
 import { useShortcut } from '../composables/useShortcut'
+import { useReplStore } from '@/store/index'
 
-const sqlQueries = injectStrict(SQL_QUERIES)
-const databaseInfo = injectStrict(DATABASE_INFO)
-const activeTable = computed(() => databaseInfo.value.activeTable || 'employees')
+const store = useReplStore()
+const notification = useNotification()
 
 const tableviewRef = ref()
 const data = ref<AnyRecord[]>([])
@@ -44,30 +44,25 @@ const pagination = ref<AnyRecord>({
   onPageSizeChange: (pageSize: any) => {
     pagination.value.pageSize = pageSize
     pagination.value.page = 1
+  },
+  prefix (payload: any) {
+    return h(
+      'div',
+      {
+        class: 'dark:text-gray-300 absolute left-0',
+      },
+      {
+        default: () => `${payload.itemCount} rows retrieved`
+      }
+    )
   }
 })
 const tableMaxHeight = ref(0)
 
-/**
- * Connected with Databse
- */
-const connectDatabase = async () => {
-  if (databaseInfo.value.connected) {
-    console.warn('Database already connected')
-    return
-  }
-  const res = await connectDB(activeTable.value)
-  databaseInfo.value.connected = !!res
-}
-
 // init the table views without data
-const initTableColumns = async (tableName: string) => {
-  const params = encodeURIComponent(`select * from ${tableName}`)
-  const tableColumns = await getTableColumns(params)
-  databaseInfo.value.activeTable = tableName
-  databaseInfo.value.tableColumns = tableColumns
+const formatTableColumns = async () => {
   // TODO sorter map with column type
-  columns.value = tableColumns.map((item: any) => {
+  columns.value = store.tableInfo.tableColumns.map((item: any) => {
     return {
       title: item.column,
       key: item.column,
@@ -76,25 +71,16 @@ const initTableColumns = async (tableName: string) => {
   })
 }
 
-// query the new sql
-const query = async () => {
-  const params = encodeURIComponent(sqlQueries.value)
-  const res = await execSQL(params)
-  return res
-}
-
-const notification = useNotification()
-
 const getTableData = async () => {
-  data.value = await query()
+  const params = encodeURIComponent(store.tableInfo.sqlQueries)
+  data.value = await execSQL(params)
   pagination.value.page = 1
 }
 
 debouncedWatch(
-  () => databaseInfo.value.manualRun,
+  () => store.tableInfo.manualRun,
   getTableData,
   {
-    immediate: true,
     deep: true,
     debounce: 333
   }
@@ -115,8 +101,9 @@ useShortcut({
 })
 
 onMounted(async () => {
-  await connectDatabase()
-  await initTableColumns(activeTable.value)
+  await store.connectDatabase()
+  await store.initTableColumns()
+  await formatTableColumns()
   await getTableData()
   tableMaxHeight.value = tableviewRef.value.offsetHeight - 28
 })

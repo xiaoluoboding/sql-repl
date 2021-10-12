@@ -16,38 +16,40 @@
 </template>
 
 <script lang="ts" setup>
-import { h, ref, onMounted } from 'vue'
-import { NButton } from 'naive-ui'
+import { h, ref, watch, nextTick } from 'vue'
 
-import { getTableColumns } from '../utils/services'
 import { AnyRecord } from '../types'
+import { useReplStore } from '@/store/index'
 
 const treeData = ref<AnyRecord[]>([])
+const store = useReplStore()
 
 // init the table views without data
-const initTableColumns = async (tableName: string) => {
-  const params = encodeURIComponent(`select * from ${tableName}`)
-  const tableColumns = await getTableColumns(params)
-
-  return tableColumns.map((item: any) => {
+const initTableColumns = () => {
+  return store.tableInfo.tableColumns.map((item: any) => {
     return {
       label: item.name,
       key: item.column,
       suffix: () => h(
-        NButton,
-        { text: true },
+        'div',
+        {},
         { default: () => item.type }
       )
     }
   })
 }
 
-onMounted(async () => {
-  const tableName = 'employees'
-  const tableColumns = await initTableColumns(tableName)
-  treeData.value = [{
-    label: tableName,
-    children: tableColumns
-  }]
+watch(
+  () => store.tableInfo.tableColumns,
+  () => {
+  const tableName = store.tableInfo.activeTable
+  const tableColumns = initTableColumns()
+  
+  nextTick(() => {
+    treeData.value = [{
+      label: tableName,
+      children: tableColumns
+    }]
+  })
 })
 </script>

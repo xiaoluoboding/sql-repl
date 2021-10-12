@@ -19,6 +19,7 @@
     "@vueuse/core": "^6.5.3",
     "keymaster": "^1.6.2",
     "naive-ui": "^2.19.3",
+    "pinia": "^2.0.0-rc.12",
     "sequelize": "^6.6.5",
     "splitpanes": "^3.0.6",
     "vue": "^3.2.13",

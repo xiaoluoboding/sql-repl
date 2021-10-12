@@ -1,7 +1,7 @@
 <template>
   <div class="repl-editor">
     <div class="repl-editor--codemirror">
-      <Codemirror v-model="sqlQueries" />
+      <Codemirror v-model="store.tableInfo.sqlQueries" :hint-info="hintInfo" />
     </div>
     <div class="repl-editor--actions">
       <div class="logo flex-1">
@@ -25,25 +25,43 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick } from 'vue'
+import { nextTick, ref } from 'vue'
 import { useNotification } from 'naive-ui'
 
 import Codemirror from '../components/codemirror/index.vue'
-import { injectStrict, SQL_QUERIES, DATABASE_INFO } from '../types'
+import { useReplStore } from '@/store/index'
 
-const sqlQueries = injectStrict(SQL_QUERIES)
-const databaseInfo = injectStrict(DATABASE_INFO)
-
+const store = useReplStore()
 const notification = useNotification()
 
-sqlQueries.value = `select *
+store.tableInfo.sqlQueries = `select *
 from employees e
-where e.salary > 10000`
+where e.salary > 20000`
+
+const hintInfo = ref({
+  tables: [
+    { label: 'employees' }
+  ],
+  schema: {
+    employees: [
+      { label: 'id' },
+      { label: 'name' },
+      { label: 'designation' },
+      { label: 'manager' },
+      { label: 'hired_on' },
+      { label: 'salary' },
+      { label: 'commission' },
+      { label: 'salary' },
+      { label: 'dept' }
+    ]
+  },
+})
+
 
 const handleRunSQL = () => {
-  databaseInfo.value.manualRun = true
+  store.tableInfo.manualRun = true
   nextTick(() => {
-    databaseInfo.value.manualRun = false
+    store.tableInfo.manualRun = false
 
     notification.success({
       title: 'Info',

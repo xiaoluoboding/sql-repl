@@ -22,6 +22,7 @@ specifiers:
   '@vueuse/core': ^6.5.3
   keymaster: ^1.6.2
   naive-ui: ^2.19.3
+  pinia: ^2.0.0-rc.12
   sass: ^1.42.1
   sequelize: ^6.6.5
   splitpanes: ^3.0.6
@@ -48,6 +49,7 @@ dependencies:
   '@vueuse/core': 6.5.3_vue@3.2.20
   keymaster: 1.6.2
   naive-ui: 2.19.5_vue@3.2.20
+  pinia: 2.0.0-rc.12_typescript@4.4.3+vue@3.2.20
   sequelize: 6.6.5
   splitpanes: 3.0.6
   vue: 3.2.20
@@ -1738,6 +1740,24 @@ packages:
     resolution: {integrity: sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==}
     engines: {node: '>=8.6'}
     dev: true
+
+  /pinia/2.0.0-rc.12_typescript@4.4.3+vue@3.2.20:
+    resolution: {integrity: sha512-1MqXgyiju5fcJBfNO+aU5GP24ZxoaC5bjosSTVnb13fJYu8CfFxCZ/XWwMoD1QnZFq6JGbYigZNCaJDL2tmzQg==}
+    peerDependencies:
+      '@vue/composition-api': ^1.2.3
+      typescript: ^4.4.3
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.0.0-beta.19
+      typescript: 4.4.3
+      vue: 3.2.20
+      vue-demi: 0.11.4_vue@3.2.20
+    dev: false
 
   /pirates/4.0.1:
     resolution: {integrity: sha512-WuNqLTbMI3tmfef2TKxlQmAiLHKtFhlsCZnPIpuv2Ow0RDVO8lfy1Opf4NUzlMXLjPl+Men7AuVdX6TA+s+uGA==}

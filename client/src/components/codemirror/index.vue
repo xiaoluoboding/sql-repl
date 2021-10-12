@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, reactive, ref, computed, watch, inject } from 'vue'
+import { onMounted, onUnmounted, reactive, ref, computed, watch } from 'vue'
 import { history } from '@codemirror/history'
 import { Compartment } from '@codemirror/state'
 import { EditorState, basicSetup } from '@codemirror/basic-setup'
@@ -14,19 +14,24 @@ import { autocompletion } from '@codemirror/autocomplete'
 import { defaultHighlightStyle } from '@codemirror/highlight'
 import { oneDark } from '@codemirror/theme-one-dark'
 
-import { IS_DARKMODE } from '../../types'
+import { useReplStore } from '@/store/index'
 
+const replStore = useReplStore()
 const props = defineProps({
   modelValue: String,
+  hintInfo: Object
 })
 
 const emit = defineEmits<{
   (e: 'update:modelValue', content: string): void
 }>()
 
-const isDarkmode = inject(IS_DARKMODE)
 const editorEl = ref<Element>()
-const activeTheme = computed(() => isDarkmode?.value ? oneDark : defaultHighlightStyle.fallback)
+const activeTheme = computed(() => {
+  return replStore.isDarkmode
+    ? oneDark
+    : defaultHighlightStyle.fallback
+})
 
 const store = reactive({
   doc: ref(props.modelValue),
@@ -56,11 +61,15 @@ const initEditor = () => {
       basicSetup,
 
       schemaCompletion({
-        dialect: SQLite
+        dialect: SQLite,
+        tables: props.hintInfo?.tables,
+        schema: props.hintInfo?.schema,
       }),
 
       SQLExtension.of(sql({
-        dialect: SQLite
+        dialect: SQLite,
+        tables: props.hintInfo?.tables,
+        schema: props.hintInfo?.schema,
       })),
 
       autocompletion({
@@ -94,7 +103,7 @@ const recreateEditor = () => {
 }
 
 watch(
-  () => isDarkmode?.value,
+  () => replStore.isDarkmode,
   recreateEditor
 )
 

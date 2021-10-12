@@ -27,22 +27,17 @@
 </template>
 
 <script setup lang="ts">
-import { provide, computed, ref } from 'vue'
+import { computed } from 'vue'
 import { NConfigProvider, darkTheme } from 'naive-ui'
 
 import Header from './views/Header.vue'
 import Aside from './views/Aside.vue'
 import ReplEditor from './views/ReplEditor.vue'
 import TableView from './views/TableView.vue'
+import { useReplStore } from '@/store/index'
 
-import { useDark } from './composables/useDark'
-import { IS_DARKMODE, SQL_QUERIES, DATABASE_INFO } from './types'
-
-const isDark = useDark()
-const theme = computed(() => isDark.value ? darkTheme : null)
-provide(IS_DARKMODE, isDark)
-provide(SQL_QUERIES, ref(''))
-provide(DATABASE_INFO, ref({}))
+const store = useReplStore()
+const theme = computed(() => store.isDarkmode ? darkTheme : null)
 
 const themeOverrides = {
   common: {
