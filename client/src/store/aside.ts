@@ -1,46 +1,31 @@
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
 
-import { shortid } from '../utils'
-
-export interface QUERY_INFO {
-  id: string
-  savedAt: string
-  label: string
-  queries: string
-}
+import type { TabInfo } from './tabs'
 
 type MENUS = 'connections' | 'SQL Queries'
 
 export const useAsideStore = defineStore('aside', {
   state: () => ({
     activeMenu: 'connections' as MENUS,
-    savedQueries: [] as QUERY_INFO[],
-    activeQuery: {} as QUERY_INFO,
+    savedQueries: [] as TabInfo[],
+    activeQuery: {} as TabInfo,
   }),
 
   actions: {
-    addQuery(label: string, queries: string) {
-      const queryInfo = {
-        id: shortid(),
-        savedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-        label,
-        queries,
-      }
+    addQuery(payload: TabInfo) {
+      this.savedQueries.push(payload)
 
-      this.savedQueries.push(queryInfo)
-
-      this.activeQuery = queryInfo
+      this.activeQuery = payload
     },
-    upsertQueries(payload: QUERY_INFO) {
-      if (this.savedQueries.length === 0) {
+    upsertQueries(payload: TabInfo) {
+      const idx = this.savedQueries.findIndex(
+        (item) => item.id === payload.id
+      )
+      if (this.savedQueries.length === 0 || idx === -1) {
         // add a new query
-        this.addQuery(payload.label, payload.queries)
+        this.addQuery(payload)
       } else {
-        const idx = this.savedQueries.findIndex(
-          (item) => item.id === payload.id
-        )
-
         const newQueryInfo = {
           ...payload,
           savedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),

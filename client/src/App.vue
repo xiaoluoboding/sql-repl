@@ -27,7 +27,7 @@
   </NConfigProvider>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed } from 'vue'
 import { NConfigProvider, darkTheme } from 'naive-ui'
 

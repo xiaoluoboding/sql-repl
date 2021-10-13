@@ -6,6 +6,8 @@
       :key="query.id"
       :class="{active: query.id === tabsStore.activeTab.id}"
       @click="handleSelectQuery(query)"
+      @mouseover="enterTabIdx = query.idx"
+      @mouseleave="enterTabIdx = -1"
     >
       <span class="prefix">
         <carbon:code class="h-4 w-4" />
@@ -13,39 +15,81 @@
       <span class="label">
         {{ query.label }} #{{query.idx}}
       </span>
-      <span class="editing text-gray-400 dark:text-gray-300" v-if="!query.isSaved">
-        <carbon:dot-mark class="h-4 w-4" />
-      </span>
-      <span class="suffix" @click="handleRemoveQuery()" v-else>
-        <carbon:close class="icon" />
-      </span>
+      <template v-if="enterTabIdx === query.idx">
+        <span class="suffix" @click="handleRemoveQuery()">
+          <carbon:close class="icon" />
+        </span>
+      </template>
+      <template v-else>
+        <template v-if="!query.isSaved">
+          <span class="editing text-gray-400 dark:text-gray-300">
+            <carbon:dot-mark class="h-4 w-4" />
+          </span>
+        </template>
+        <template v-else-if="query.id === tabsStore.activeTab.id">
+          <span class="suffix" @click="handleRemoveQuery()">
+            <carbon:close class="icon" />
+          </span>
+        </template>
+        <template v-else>
+          <span class="suffix" />
+        </template>
+      </template>
     </div>
-    <button class="query-selector--added" @click="handleAddQuery">
+    <button class="query-selector--added" @click="handleAddQuery('')">
       <carbon-add class="h-5 w-5 hover:bg-gray-200 hover:dark:bg-dark-300 hover:rounded-sm" />
     </button>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref, nextTick } from 'vue'
+import { debouncedWatch } from '@vueuse/core'
+
 import { useReplStore } from '../store/repl'
-import { useTabsStore } from '../store/tabs'
-import { useAsideStore } from '../store/aside'
+import { useTabsStore, TabInfo } from '../store/tabs'
 import { useShortcut } from '../composables/useShortcut'
 import { debounce } from '../utils'
 
+const enterTabIdx = ref(-1)
 const replStore = useReplStore()
 const tabsStore = useTabsStore()
-const asideStore = useAsideStore()
 
-const handleAddQuery = () => {
-  replStore.tableInfo.sqlQueries = ''
-  tabsStore.addTab()
-  // asideStore.addQuery(tabsStore.activeTab.label, '')
+const handleAddQuery = (query: string) => {
+  replStore.tableInfo.sqlQueries = query
+  tabsStore.addTab(query)
 }
-const handleRemoveQuery = () => tabsStore.removeTab()
-const handleSelectQuery = (query: any) => tabsStore.setActiveTab(query)
+// TODO handle remove query
+const handleRemoveQuery = () => {
+  tabsStore.removeTab()
+}
+const handleSelectQuery = (query: TabInfo) => {
+  tabsStore.setActiveTab(query)
+  replStore.tableInfo.sqlQueries = query.queries
+}
+
+;(() => {
+  const initQueries = `select *
+from employees e
+where e.salary > 20000`
+  handleAddQuery(initQueries)
+})()
 
 tabsStore.setActiveTab(tabsStore.queryTabs[0])
+
+// update queries in right tab
+debouncedWatch(
+  () => replStore.tableInfo.sqlQueries,
+  (newVal) => {
+    tabsStore.updateTab({
+      queries: newVal
+    })
+  },
+  {
+    deep: true,
+    debounce: 333
+  }
+)
 
 useShortcut({
   '⌥+w, alt+w': debounce(() => {

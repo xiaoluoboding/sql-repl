@@ -60,7 +60,7 @@ const showModal = ref(false)
 const doSaveSQL = () => {
   tabsStore.saveTab()
   asideStore.upsertQueries({
-    ...asideStore.activeQuery,
+    ...tabsStore.activeTab,
     label: tabsStore.activeTab.label,
     queries: replStore.tableInfo.sqlQueries
   })
@@ -86,10 +86,12 @@ const handleRunSQL = () => {
 
 debouncedWatch(
   () => replStore.tableInfo.sqlQueries,
-  (newVal) => {
-    tabsStore.updateTab({
-      isSaved: false
-    })
+  (newVal, oldVal) => {
+    if (newVal !== oldVal && newVal !== '') {
+      tabsStore.updateTab({
+        isSaved: false
+      })
+    }
   },
   {
     deep: true,

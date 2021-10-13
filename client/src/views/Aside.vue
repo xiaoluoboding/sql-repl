@@ -47,10 +47,10 @@
           @click="handleSelectQuery(query)"
         >
           <label class="block w-full flex items-center font-semibold">
-            {{query.label}}
+            <carbon:code class="h-4 w-4 mr-2" /> {{query.label}}
           </label>
           <time class="block w-full flex items-center mt-2">
-            <carbon:time class="h-3 w-3 mr-2" />  {{query.savedAt}}
+            <carbon:time class="h-4 w-4 mr-2" /> {{query.savedAt}}
           </time>
         </div>
       </template>
@@ -63,10 +63,12 @@ import { h, ref, computed, watch, nextTick } from 'vue'
 
 import { AnyRecord } from '../types'
 import { useReplStore } from '../store/repl'
-import { QUERY_INFO, useAsideStore } from '../store/aside'
+import { useTabsStore, TabInfo } from '../store/tabs'
+import { useAsideStore } from '../store/aside'
 
 const treeData = ref<AnyRecord[]>([])
 const replStore = useReplStore()
+const tabsStore = useTabsStore()
 const asideStore = useAsideStore()
 
 const queries = computed(() => {
@@ -88,8 +90,9 @@ const initTableColumns = () => {
   })
 }
 
-const handleSelectQuery = (query: QUERY_INFO) => {
-  replStore.tableInfo.sqlQueries = query.queries
+const handleSelectQuery = (query: TabInfo) => {
+  replStore.tableInfo.sqlQueries = query.queries || ''
+  tabsStore.addTab(query.queries || '')
 }
 
 watch(

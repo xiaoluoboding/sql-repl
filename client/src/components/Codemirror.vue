@@ -114,7 +114,7 @@ watch(
   () => replStore.tableInfo.sqlQueries,
   (newVal) => {
     store.doc = newVal
-    recreateEditor()
+    // recreateEditor()
   }
 )
 

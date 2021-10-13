@@ -1,7 +1,11 @@
 <template>
   <div class="repl-editor">
     <div class="repl-editor--codemirror">
-      <Codemirror v-model="replStore.tableInfo.sqlQueries" :hint-info="hintInfo" />
+      <Codemirror
+        v-model="replStore.tableInfo.sqlQueries"
+        :key="tabsStore.activeTab.id"
+        :hint-info="hintInfo"
+      />
     </div>
     <EditorActions />
   </div>
@@ -13,12 +17,10 @@ import { ref } from 'vue'
 import Codemirror from '../components/Codemirror.vue'
 import EditorActions from './EditorActions.vue'
 import { useReplStore } from '../store/repl'
+import { useTabsStore } from '../store/tabs'
 
 const replStore = useReplStore()
-
-replStore.tableInfo.sqlQueries = `select *
-from employees e
-where e.salary > 20000`
+const tabsStore = useTabsStore()
 
 // TODO make hint info dymanic
 const hintInfo = ref({

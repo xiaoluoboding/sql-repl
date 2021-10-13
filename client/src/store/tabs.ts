@@ -2,38 +2,34 @@ import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
 
 import { shortid } from '../utils'
-import { AnyRecord } from '../types'
 
-export interface Tab {
+export interface TabInfo {
   id: string;
   idx: number;
   label: string;
   isSaved: boolean;
   savedAt: string;
+  queries: string;
 }
+
+export type AnyTabInfo = Partial<TabInfo>
 
 export const useTabsStore = defineStore('tabs', {
   state: () => ({
-    queryTabs: [
-      {
-        id: shortid(),
-        idx: 1,
-        label: 'Untitled',
-        isSaved: false,
-        savedAt: dayjs().format('YYYY-MM-DD HH:mm:ss')
-      },
-    ] as Tab[],
-    activeTab: {} as Tab,
+    queryTabs: [] as TabInfo[],
+    activeTab: {} as TabInfo,
     activeTabIdx: 1,
   }),
 
   getters: {
-    currentTab: (state) =>
-      state.queryTabs.find((tab) => tab.idx === state.activeTabIdx),
+    currentTab: (state) => {
+      const idx = state.queryTabs.findIndex((tab) => tab.idx === state.activeTabIdx)
+      return idx === -1 ? {} : state.queryTabs[idx]
+    },
   },
 
   actions: {
-    addTab() {
+    addTab(queries: string) {
       const id = shortid()
       const idx =
         this.queryTabs.length === 0
@@ -43,8 +39,9 @@ export const useTabsStore = defineStore('tabs', {
         id,
         idx,
         label: 'Untitled',
-        isSaved: false,
+        isSaved: true,
         savedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+        queries,
       }
 
       this.queryTabs.push(newTab)
@@ -62,11 +59,11 @@ export const useTabsStore = defineStore('tabs', {
         this.setActiveTab(this.queryTabs[tabsLength - 1])
       }
     },
-    updateTab(payload: AnyRecord) {
+    updateTab(payload: AnyTabInfo) {
       const tab = this.currentTab
       Object.assign(tab, payload)
     },
-    setActiveTab(payload: Tab) {
+    setActiveTab(payload: TabInfo) {
       const { idx } = payload
       const tab = this.queryTabs.find((tab) => tab.idx === idx)
 
@@ -76,7 +73,7 @@ export const useTabsStore = defineStore('tabs', {
       }
     },
     saveTab() {
-      const tab = this.currentTab
+      const tab = this.activeTab
 
       if (tab) {
         tab.isSaved = true
