@@ -19,7 +19,7 @@
 import { h, ref, watch, nextTick } from 'vue'
 
 import { AnyRecord } from '../types'
-import { useReplStore } from '@/store/index'
+import { useReplStore } from '../store/repl'
 
 const treeData = ref<AnyRecord[]>([])
 const store = useReplStore()

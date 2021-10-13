@@ -1,6 +1,5 @@
 import keymaster from 'keymaster'
 import { getCurrentInstance } from 'vue'
-
 import { tryOnMounted, tryOnUnmounted } from '@vueuse/core'
 
 /**

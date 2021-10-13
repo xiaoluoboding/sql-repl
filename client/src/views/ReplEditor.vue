@@ -1,16 +1,21 @@
 <template>
   <div class="repl-editor">
     <div class="repl-editor--codemirror">
-      <Codemirror v-model="store.tableInfo.sqlQueries" :hint-info="hintInfo" />
+      <Codemirror v-model="replStore.tableInfo.sqlQueries" :hint-info="hintInfo" />
     </div>
     <div class="repl-editor--actions">
       <div class="logo flex-1">
         <simple-icons:sqlite />
       </div>
       <div class="actions flex flex-col items-center space-y-2">
-        <button class="actions--btn">
-          <carbon-save class="h-4 w-4" />
-        </button>
+        <n-tooltip placement="left-center">
+          <template #trigger>
+            <button class="actions--btn" @click="handleSaveSQL">
+              <carbon-save class="h-4 w-4" />
+            </button>
+          </template>
+          {{ $t('button.save_sql_queries') }}
+        </n-tooltip>
         <n-tooltip placement="left-center">
           <template #trigger>
             <button class="actions--btn" @click="handleRunSQL">
@@ -20,21 +25,41 @@
           {{ $t('button.run_sql_queries') }}
         </n-tooltip>
       </div>
+      <n-modal
+        v-model:show="showModal"
+        :mask-closable="false"
+        preset="dialog"
+        :title="$t('modal.save_title')"
+        :positive-text="$t('common.save')"
+        :negative-text="$t('common.cancel')"
+        @positive-click="doSaveSQL"
+        @negative-click="showModal = false"
+      >
+        <n-input
+          v-model:value="tabsStore.activeTab.label"
+          class="mt-4"
+          :placeholder="$t('modal.save_placeholder')"
+        />
+      </n-modal>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { nextTick, ref } from 'vue'
-import { useNotification } from 'naive-ui'
+import { debouncedWatch } from '@vueuse/core'
+import { useMessage } from 'naive-ui'
 
-import Codemirror from '../components/codemirror/index.vue'
-import { useReplStore } from '@/store/index'
+import Codemirror from '../components/Codemirror.vue'
+import { useShortcut } from '../composables/useShortcut'
+import { useReplStore } from '../store/repl'
+import { useTabsStore } from '../store/tabs'
 
-const store = useReplStore()
-const notification = useNotification()
+const replStore = useReplStore()
+const tabsStore = useTabsStore()
+const message = useMessage()
 
-store.tableInfo.sqlQueries = `select *
+replStore.tableInfo.sqlQueries = `select *
 from employees e
 where e.salary > 20000`
 
@@ -57,19 +82,48 @@ const hintInfo = ref({
   },
 })
 
+const showModal = ref(false)
+
+const doSaveSQL = () => {
+  tabsStore.saveTab()
+  message.success('Saved!')
+}
+
+const handleSaveSQL = () => {
+  if (tabsStore.activeTab.label === 'Untitled') {
+    showModal.value = true
+  } else {
+    doSaveSQL()
+  }
+}
 
 const handleRunSQL = () => {
-  store.tableInfo.manualRun = true
+  replStore.tableInfo.manualRun = true
   nextTick(() => {
-    store.tableInfo.manualRun = false
+    replStore.tableInfo.manualRun = false
 
-    notification.success({
-      title: 'Info',
-      content: 'The Queries Runs Successfully!',
-      duration: 2000
-    })
+    message.success('The Queries Runs Successfully!')
   })
 }
+
+debouncedWatch(
+  () => replStore.tableInfo.sqlQueries,
+  (newVal) => {
+    tabsStore.updateTab({
+      isSaved: false
+    })
+  },
+  {
+    deep: true,
+    debounce: 333
+  }
+)
+
+useShortcut({
+  '⌘+s, ctrl+s': () => {
+    handleSaveSQL()
+  }
+})
 </script>
 
 <style lang="scss">
@@ -85,13 +139,13 @@ const handleRunSQL = () => {
     @apply h-full w-9 p-2;
     @apply flex flex-col items-center justify-end;
     @apply space-y-2;
-    @apply bg-blue-gray-100 dark:bg-dark-700;
+    @apply bg-blue-gray-100 dark:bg-dark-400;
     @apply text-gray-900 dark:text-blue-gray-100;
   }
 
   .actions--btn {
     @apply h-8 p-2;
-    @apply hover:bg-gray-100 hover:dark:bg-true-gray-800;
+    @apply hover:bg-gray-100 hover:dark:bg-true-gray-700;
     @apply rounded-md outline-transparent;
   }
 }

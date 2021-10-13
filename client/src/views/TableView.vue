@@ -1,12 +1,5 @@
 <template>
   <div class="table-view bg-white dark:bg-true-gray-900 h-full" ref="tableviewRef">
-    <!-- 数据连接 -->
-    <!-- <n-button text icon-placement="left" class="">
-      <template #icon>
-        <carbon-data-collection class="h-5 w-5" />
-      </template>
-      数据连接
-    </n-button> -->
     <n-data-table
       size="mini"
       :columns="columns"
@@ -20,15 +13,15 @@
 <script lang="ts" setup>
 import { ref, onMounted, h } from 'vue'
 import { debouncedWatch } from '@vueuse/core'
-import { useNotification } from 'naive-ui'
+import { useMessage } from 'naive-ui'
 
 import { execSQL } from '../utils/services'
 import { AnyRecord } from '../types'
 import { useShortcut } from '../composables/useShortcut'
-import { useReplStore } from '@/store/index'
+import { useReplStore } from '../store/repl'
 
 const store = useReplStore()
-const notification = useNotification()
+const message = useMessage()
 
 const tableviewRef = ref()
 const data = ref<AnyRecord[]>([])
@@ -89,14 +82,7 @@ debouncedWatch(
 useShortcut({
   '⌘+e, ctrl+e': async () => {
     await getTableData()
-    notification.success({
-      title: 'Info',
-      content: 'The Queries Runs Successfully!',
-      duration: 2000
-    })
-  },
-  '⌘+s, ctrl+s': () => {
-    console.log('⌘+s')
+    message.success('The Queries Runs Successfully!')
   }
 })
 

@@ -14,7 +14,7 @@ import { autocompletion } from '@codemirror/autocomplete'
 import { defaultHighlightStyle } from '@codemirror/highlight'
 import { oneDark } from '@codemirror/theme-one-dark'
 
-import { useReplStore } from '@/store/index'
+import { useReplStore } from '../store/repl'
 
 const replStore = useReplStore()
 const props = defineProps({

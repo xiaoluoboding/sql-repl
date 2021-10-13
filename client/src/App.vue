@@ -5,13 +5,14 @@
     :theme="theme"
     :theme-overrides="themeOverrides"
   >
-    <n-notification-provider>
+    <NMessageProvider>
       <Header />
       <Splitpanes class="default-theme">
         <Pane size="20" min-size="0" max-size="30">
           <Aside />
         </Pane>
         <Pane size="80">
+          <QuerySelector />
           <Splitpanes horizontal class="default-theme">
             <Pane size="50">
               <ReplEditor />
@@ -22,7 +23,7 @@
           </Splitpanes>
         </Pane>
       </Splitpanes>
-    </n-notification-provider>
+    </NMessageProvider>
   </NConfigProvider>
 </template>
 
@@ -33,8 +34,9 @@ import { NConfigProvider, darkTheme } from 'naive-ui'
 import Header from './views/Header.vue'
 import Aside from './views/Aside.vue'
 import ReplEditor from './views/ReplEditor.vue'
+import QuerySelector from './views/QuerySelector.vue'
 import TableView from './views/TableView.vue'
-import { useReplStore } from '@/store/index'
+import { useReplStore } from './store/repl'
 
 const store = useReplStore()
 const theme = computed(() => store.isDarkmode ? darkTheme : null)
@@ -51,6 +53,12 @@ const themeOverrides = {
     primaryColorSuppl: '#0284c7'
   }
 }
+
+document.addEventListener('keydown', (e) => {
+  if (e.metaKey && e.key === 'w') {
+    e.preventDefault()
+  }
+})
 </script>
 
 <style>
@@ -63,7 +71,7 @@ body {
   --base: #444;
   --nav-height: 50px;
   --font-code: 'Source Code Pro', monospace;
-  --color-branding: #3ca877;
+  --color-branding: #38bdf8;
   --color-branding-dark: #416f9c;
   --border-color: rgba(200, 200, 200, 0.2);
   @apply bg-gray-100 dark:bg-gray-900;

@@ -6,11 +6,16 @@ common:
   open: Open
   save: Save
   run: Run
+  cancel: Cancel
 button:
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
   options: App Options
-  create_connection: Create Connection
-  run_sql_queries: Run SQL Queries（⌘ + E）
+  create_connection: New Connection
+  run_sql_queries: Run SQL Queries（⌘E）
+  save_sql_queries: Save SQL Queries（⌘S）
+modal:
+  save_title: Save SQL Queries
+  save_placeholder: SQL Queries Alias Name
 home:
   app_name: SQL REPL

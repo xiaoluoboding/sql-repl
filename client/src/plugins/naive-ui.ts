@@ -3,39 +3,39 @@ import {
   create,
   NButton,
   NButtonGroup,
-  NSpace,
-  NTooltip,
-  NPopover,
+  NDataTable,
   NInput,
-  NTag,
+  NMessageProvider,
+  NModal,
+  NPopover,
   NPopconfirm,
+  NSpace,
+  NTag,
+  NTooltip,
+  NTree,
   NUpload,
   NUploadDragger,
-  NDataTable,
-  NTree,
-  NNotificationProvider
 } from 'naive-ui'
 
 const naive = create({
   components: [
     NButton,
     NButtonGroup,
-    NSpace,
-    NTooltip,
-    NPopover,
+    NDataTable,
     NInput,
-    NTag,
+    NMessageProvider,
+    NModal,
+    NPopover,
     NPopconfirm,
+    NSpace,
+    NTag,
+    NTooltip,
+    NTree,
     NUpload,
     NUploadDragger,
-    NDataTable,
-    NTree,
-    NNotificationProvider,
   ],
 })
 
-const install = (app: App) => {
-  app.use(naive)
-}
+const install = (app: App) => app.use(naive)
 
 export default install

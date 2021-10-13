@@ -39,7 +39,7 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import { useReplStore } from '@/store/index'
+import { useReplStore } from '../store/repl'
 
 const store = useReplStore()
 const isShowSettings = ref(false)
