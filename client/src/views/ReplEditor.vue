@@ -3,66 +3,24 @@
     <div class="repl-editor--codemirror">
       <Codemirror v-model="replStore.tableInfo.sqlQueries" :hint-info="hintInfo" />
     </div>
-    <div class="repl-editor--actions">
-      <div class="logo flex-1">
-        <simple-icons:sqlite />
-      </div>
-      <div class="actions flex flex-col items-center space-y-2">
-        <n-tooltip placement="left-center">
-          <template #trigger>
-            <button class="actions--btn" @click="handleSaveSQL">
-              <carbon-save class="h-4 w-4" />
-            </button>
-          </template>
-          {{ $t('button.save_sql_queries') }}
-        </n-tooltip>
-        <n-tooltip placement="left-center">
-          <template #trigger>
-            <button class="actions--btn" @click="handleRunSQL">
-              <carbon-play-filled-alt class="h-4 w-4" />
-            </button>
-          </template>
-          {{ $t('button.run_sql_queries') }}
-        </n-tooltip>
-      </div>
-      <n-modal
-        v-model:show="showModal"
-        :mask-closable="false"
-        preset="dialog"
-        :title="$t('modal.save_title')"
-        :positive-text="$t('common.save')"
-        :negative-text="$t('common.cancel')"
-        @positive-click="doSaveSQL"
-        @negative-click="showModal = false"
-      >
-        <n-input
-          v-model:value="tabsStore.activeTab.label"
-          class="mt-4"
-          :placeholder="$t('modal.save_placeholder')"
-        />
-      </n-modal>
-    </div>
+    <EditorActions />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { nextTick, ref } from 'vue'
-import { debouncedWatch } from '@vueuse/core'
-import { useMessage } from 'naive-ui'
+import { ref } from 'vue'
 
 import Codemirror from '../components/Codemirror.vue'
-import { useShortcut } from '../composables/useShortcut'
+import EditorActions from './EditorActions.vue'
 import { useReplStore } from '../store/repl'
-import { useTabsStore } from '../store/tabs'
 
 const replStore = useReplStore()
-const tabsStore = useTabsStore()
-const message = useMessage()
 
 replStore.tableInfo.sqlQueries = `select *
 from employees e
 where e.salary > 20000`
 
+// TODO make hint info dymanic
 const hintInfo = ref({
   tables: [
     { label: 'employees' }
@@ -80,49 +38,6 @@ const hintInfo = ref({
       { label: 'dept' }
     ]
   },
-})
-
-const showModal = ref(false)
-
-const doSaveSQL = () => {
-  tabsStore.saveTab()
-  message.success('Saved!')
-}
-
-const handleSaveSQL = () => {
-  if (tabsStore.activeTab.label === 'Untitled') {
-    showModal.value = true
-  } else {
-    doSaveSQL()
-  }
-}
-
-const handleRunSQL = () => {
-  replStore.tableInfo.manualRun = true
-  nextTick(() => {
-    replStore.tableInfo.manualRun = false
-
-    message.success('The Queries Runs Successfully!')
-  })
-}
-
-debouncedWatch(
-  () => replStore.tableInfo.sqlQueries,
-  (newVal) => {
-    tabsStore.updateTab({
-      isSaved: false
-    })
-  },
-  {
-    deep: true,
-    debounce: 333
-  }
-)
-
-useShortcut({
-  '⌘+s, ctrl+s': () => {
-    handleSaveSQL()
-  }
 })
 </script>
 

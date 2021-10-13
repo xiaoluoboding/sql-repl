@@ -1,10 +1,10 @@
 <template>
   <div class="query-selector">
     <div
-      v-for="(query, idx) in store.queryTabs"
+      v-for="(query, idx) in tabsStore.queryTabs"
       class="query-selector--queries"
       :key="query.id"
-      :class="{active: query.id === store.activeTab.id}"
+      :class="{active: query.id === tabsStore.activeTab.id}"
       @click="handleSelectQuery(query)"
     >
       <span class="prefix">
@@ -27,17 +27,25 @@
 </template>
 
 <script lang="ts" setup>
+import { useReplStore } from '../store/repl'
 import { useTabsStore } from '../store/tabs'
+import { useAsideStore } from '../store/aside'
 import { useShortcut } from '../composables/useShortcut'
 import { debounce } from '../utils'
 
-const store = useTabsStore()
+const replStore = useReplStore()
+const tabsStore = useTabsStore()
+const asideStore = useAsideStore()
 
-const handleAddQuery = () => store.addTab()
-const handleRemoveQuery = () => store.removeTab()
-const handleSelectQuery = (query: any) => store.setActiveTab(query)
+const handleAddQuery = () => {
+  replStore.tableInfo.sqlQueries = ''
+  tabsStore.addTab()
+  // asideStore.addQuery(tabsStore.activeTab.label, '')
+}
+const handleRemoveQuery = () => tabsStore.removeTab()
+const handleSelectQuery = (query: any) => tabsStore.setActiveTab(query)
 
-store.setActiveTab(store.queryTabs[0])
+tabsStore.setActiveTab(tabsStore.queryTabs[0])
 
 useShortcut({
   '⌥+w, alt+w': debounce(() => {
@@ -67,7 +75,8 @@ useShortcut({
       @apply text-gray-900 dark:text-$color-branding ;
 
       &:before {
-        @apply content h-[3px] w-full;
+        content: '';
+        @apply h-[2px] w-full;
         @apply absolute left-0 bottom-0;
         @apply bg-$color-branding;
       }

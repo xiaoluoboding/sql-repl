@@ -15,8 +15,10 @@ import { defaultHighlightStyle } from '@codemirror/highlight'
 import { oneDark } from '@codemirror/theme-one-dark'
 
 import { useReplStore } from '../store/repl'
+import { useAsideStore } from '../store/aside'
 
 const replStore = useReplStore()
+const asideStore = useAsideStore()
 const props = defineProps({
   modelValue: String,
   hintInfo: Object
@@ -107,6 +109,15 @@ watch(
   recreateEditor
 )
 
+watch(
+  // () => asideStore.activeQuery.queries,
+  () => replStore.tableInfo.sqlQueries,
+  (newVal) => {
+    store.doc = newVal
+    recreateEditor()
+  }
+)
+
 onMounted(initEditor)
 
 onUnmounted(disposeEditor)
@@ -114,11 +125,18 @@ onUnmounted(disposeEditor)
 
 <style lang="scss">
 .codemirror-container {
-  height: 100%;
-  overflow-y: auto;
+  @apply h-full overflow-y-auto;
 
   .cm-editor {
-    height: 100%;
+    @apply h-full dark:bg-true-gray-900;
+  }
+
+  .cm-activeLine {
+    @apply dark:bg-true-gray-800;
+  }
+
+  .cm-gutters {
+    @apply dark:bg-true-gray-900;
   }
 }
 </style>

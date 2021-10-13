@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import dayjs from 'dayjs'
 
 import { shortid } from '../utils'
 import { AnyRecord } from '../types'
@@ -8,6 +9,7 @@ export interface Tab {
   idx: number;
   label: string;
   isSaved: boolean;
+  savedAt: string;
 }
 
 export const useTabsStore = defineStore('tabs', {
@@ -17,19 +19,21 @@ export const useTabsStore = defineStore('tabs', {
         id: shortid(),
         idx: 1,
         label: 'Untitled',
-        isSaved: false
-      }
+        isSaved: false,
+        savedAt: dayjs().format('YYYY-MM-DD HH:mm:ss')
+      },
     ] as Tab[],
     activeTab: {} as Tab,
     activeTabIdx: 1,
   }),
 
   getters: {
-    currentTab: (state) => state.queryTabs.find((tab) => tab.idx === state.activeTabIdx)
+    currentTab: (state) =>
+      state.queryTabs.find((tab) => tab.idx === state.activeTabIdx),
   },
 
   actions: {
-    addTab () {
+    addTab() {
       const id = shortid()
       const idx =
         this.queryTabs.length === 0
@@ -40,25 +44,29 @@ export const useTabsStore = defineStore('tabs', {
         idx,
         label: 'Untitled',
         isSaved: false,
+        savedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
       }
 
       this.queryTabs.push(newTab)
       this.activeTab = newTab
       this.activeTabIdx = idx
     },
-    removeTab () {
-      this.queryTabs.splice(this.queryTabs.findIndex(tab => tab.idx === this.activeTab.idx), 1)
+    removeTab() {
+      this.queryTabs.splice(
+        this.queryTabs.findIndex((tab) => tab.idx === this.activeTab.idx),
+        1
+      )
 
       const tabsLength = this.queryTabs.length
       if (tabsLength > 0) {
         this.setActiveTab(this.queryTabs[tabsLength - 1])
       }
     },
-    updateTab (payload: AnyRecord) {
+    updateTab(payload: AnyRecord) {
       const tab = this.currentTab
       Object.assign(tab, payload)
     },
-    setActiveTab (payload: Tab) {
+    setActiveTab(payload: Tab) {
       const { idx } = payload
       const tab = this.queryTabs.find((tab) => tab.idx === idx)
 
@@ -67,12 +75,12 @@ export const useTabsStore = defineStore('tabs', {
         this.activeTabIdx = idx
       }
     },
-    saveTab () {
+    saveTab() {
       const tab = this.currentTab
 
       if (tab) {
         tab.isSaved = true
       }
-    }
+    },
   },
 })

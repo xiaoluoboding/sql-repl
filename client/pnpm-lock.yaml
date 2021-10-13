@@ -20,6 +20,7 @@ specifiers:
   '@types/sql.js': ^1.4.3
   '@vitejs/plugin-vue': ^1.9.0
   '@vueuse/core': ^6.5.3
+  dayjs: ^1.10.7
   keymaster: ^1.6.2
   naive-ui: ^2.19.3
   pinia: ^2.0.0-rc.12
@@ -47,6 +48,7 @@ dependencies:
   '@codemirror/theme-one-dark': 0.19.0
   '@codemirror/view': 0.19.9
   '@vueuse/core': 6.5.3_vue@3.2.20
+  dayjs: 1.10.7
   keymaster: 1.6.2
   naive-ui: 2.19.5_vue@3.2.20
   pinia: 2.0.0-rc.12_typescript@4.4.3+vue@3.2.20
@@ -1030,6 +1032,10 @@ packages:
   /date-fns/2.25.0:
     resolution: {integrity: sha512-ovYRFnTrbGPD4nqaEqescPEv1mNwvt+UTqI3Ay9SzNtey9NZnYu6E2qCcBBgJ6/2VF1zGGygpyTDITqpQQ5e+w==}
     engines: {node: '>=0.11'}
+    dev: false
+
+  /dayjs/1.10.7:
+    resolution: {integrity: sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==}
     dev: false
 
   /debug/4.3.2:
