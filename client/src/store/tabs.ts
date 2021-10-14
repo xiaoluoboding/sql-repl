@@ -14,7 +14,13 @@ export interface TabInfo {
 
 export type AnyTabInfo = Partial<TabInfo>
 
-export const useTabsStore = defineStore('tabs', {
+export const useTabsStore = defineStore({
+  id: 'replTabs',
+
+  persist: {
+    enabled: true,
+  },
+
   state: () => ({
     queryTabs: [] as TabInfo[],
     activeTab: {} as TabInfo,
@@ -23,7 +29,9 @@ export const useTabsStore = defineStore('tabs', {
 
   getters: {
     currentTab: (state) => {
-      const idx = state.queryTabs.findIndex((tab) => tab.idx === state.activeTabIdx)
+      const idx = state.queryTabs.findIndex(
+        (tab) => tab.idx === state.activeTabIdx
+      )
       return idx === -1 ? {} : state.queryTabs[idx]
     },
   },
@@ -57,6 +65,15 @@ export const useTabsStore = defineStore('tabs', {
       const tabsLength = this.queryTabs.length
       if (tabsLength > 0) {
         this.setActiveTab(this.queryTabs[tabsLength - 1])
+      } else {
+        this.activeTab = {
+          id: shortid(),
+          idx: 0,
+          label: 'Untitled',
+          isSaved: true,
+          savedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          queries: '',
+        }
       }
     },
     updateTab(payload: AnyTabInfo) {

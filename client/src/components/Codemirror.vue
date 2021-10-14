@@ -109,15 +109,6 @@ watch(
   recreateEditor
 )
 
-watch(
-  // () => asideStore.activeQuery.queries,
-  () => replStore.tableInfo.sqlQueries,
-  (newVal) => {
-    store.doc = newVal
-    // recreateEditor()
-  }
-)
-
 onMounted(initEditor)
 
 onUnmounted(disposeEditor)

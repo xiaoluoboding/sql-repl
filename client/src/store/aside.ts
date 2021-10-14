@@ -5,7 +5,13 @@ import type { TabInfo } from './tabs'
 
 type MENUS = 'connections' | 'SQL Queries'
 
-export const useAsideStore = defineStore('aside', {
+export const useAsideStore = defineStore({
+  id: 'replAside',
+
+  persist: {
+    enabled: true
+  },
+
   state: () => ({
     activeMenu: 'connections' as MENUS,
     savedQueries: [] as TabInfo[],

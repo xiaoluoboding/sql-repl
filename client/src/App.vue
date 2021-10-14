@@ -13,14 +13,19 @@
         </Pane>
         <Pane size="80">
           <QuerySelector />
-          <Splitpanes horizontal class="default-theme">
-            <Pane size="50">
-              <ReplEditor />
-            </Pane>
-            <Pane size="50">
-              <TableView />
-            </Pane>
-          </Splitpanes>
+          <template v-if="hasTabs">
+            <Splitpanes horizontal class="default-theme" :key="tabsStore.activeTab.id">
+              <Pane size="50">
+                <ReplEditor />
+              </Pane>
+              <Pane size="50">
+                <TableView />
+              </Pane>
+            </Splitpanes>
+          </template>
+          <template v-else>
+            <EmptyHolder />
+          </template>
         </Pane>
       </Splitpanes>
     </NMessageProvider>
@@ -36,10 +41,14 @@ import Aside from './views/Aside.vue'
 import ReplEditor from './views/ReplEditor.vue'
 import QuerySelector from './views/QuerySelector.vue'
 import TableView from './views/TableView.vue'
+import EmptyHolder from './views/EmptyHolder.vue'
 import { useReplStore } from './store/repl'
+import { useTabsStore } from './store/tabs'
 
-const store = useReplStore()
-const theme = computed(() => store.isDarkmode ? darkTheme : null)
+const replStore = useReplStore()
+const tabsStore = useTabsStore()
+const theme = computed(() => replStore.isDarkmode ? darkTheme : null)
+const hasTabs = computed(() => tabsStore.queryTabs.length > 0)
 
 const themeOverrides = {
   common: {
@@ -62,6 +71,13 @@ document.addEventListener('keydown', (e) => {
 </script>
 
 <style>
+html,
+body,
+#app,
+.repl-wrapper {
+  @apply h-full;
+}
+
 body {
   font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -69,7 +85,7 @@ body {
   color: var(--base);
   margin: 0;
   --base: #444;
-  --nav-height: 50px;
+  --nav-height: 48px;
   --font-code: 'Source Code Pro', monospace;
   --color-branding: #38bdf8;
   --color-branding-dark: #416f9c;

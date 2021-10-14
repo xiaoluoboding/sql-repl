@@ -43,7 +43,9 @@
         <div
           v-for="query in queries"
           :key="query.id"
-          class="m-2 p-2 text-[14px] cursor-pointer bg-true-gray-800 text-gray-700 dark:text-true-gray-400"
+          class="m-2 p-2 cursor-pointer bg-true-gray-800"
+          text="[14px] gray-700 dark:true-gray-400"
+          bg="blue-gray-100 dark:true-gray-800"
           @click="handleSelectQuery(query)"
         >
           <label class="block w-full flex items-center font-semibold">

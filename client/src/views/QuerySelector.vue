@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, nextTick } from 'vue'
+import { ref } from 'vue'
 import { debouncedWatch } from '@vueuse/core'
 
 import { useReplStore } from '../store/repl'
@@ -59,28 +59,36 @@ const handleAddQuery = (query: string) => {
   replStore.tableInfo.sqlQueries = query
   tabsStore.addTab(query)
 }
-// TODO handle remove query
+
 const handleRemoveQuery = () => {
   tabsStore.removeTab()
+  replStore.tableInfo.sqlQueries = tabsStore.queryTabs.length > 0
+    ? tabsStore.activeTab.queries
+    : ''
 }
+
 const handleSelectQuery = (query: TabInfo) => {
   tabsStore.setActiveTab(query)
   replStore.tableInfo.sqlQueries = query.queries
 }
 
-;(() => {
-  const initQueries = `select *
+
+const initQueries = `select *
 from employees e
 where e.salary > 20000`
-  handleAddQuery(initQueries)
-})()
 
-tabsStore.setActiveTab(tabsStore.queryTabs[0])
+if (tabsStore.queryTabs.length === 0) {
+  handleAddQuery(initQueries)
+  tabsStore.setActiveTab(tabsStore.queryTabs[0])
+} else {
+  tabsStore.setActiveTab(tabsStore.activeTab)
+}
 
 // update queries in right tab
 debouncedWatch(
   () => replStore.tableInfo.sqlQueries,
   (newVal) => {
+    console.log(newVal)
     tabsStore.updateTab({
       queries: newVal
     })

@@ -3,7 +3,13 @@ import { defineStore } from 'pinia'
 import { connectDB, getTableColumns } from '../utils/services'
 import { useDark } from '../composables/useDark'
 
-export const useReplStore = defineStore('repl', {
+export const useReplStore = defineStore({
+  id: 'replStore',
+
+  persist: {
+    enabled: true,
+  },
+
   state: () => ({
     isDarkmode: useDark(),
     databaseInfo: {
