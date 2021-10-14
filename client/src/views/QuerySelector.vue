@@ -78,8 +78,8 @@ from ${replStore.databaseInfo.activeDB}
 limit 10`
 
 if (tabsStore.queryTabs.length === 0) {
-  handleAddQuery(initQueries)
-  tabsStore.setActiveTab(tabsStore.queryTabs[0])
+  // handleAddQuery(initQueries)
+  // tabsStore.setActiveTab(tabsStore.queryTabs[0])
 } else {
   tabsStore.setActiveTab(tabsStore.activeTab)
 }

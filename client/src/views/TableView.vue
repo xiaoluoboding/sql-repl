@@ -88,8 +88,8 @@ useShortcut({
 
 onMounted(async () => {
   replStore.databaseInfo.connected = false
-  await replStore.connectDatabase()
-  await replStore.initTableColumns()
+  // await replStore.connectDatabase()
+  // await replStore.initTableColumns()
   await formatTableColumns()
   await getTableData()
   tableMaxHeight.value = tableviewRef.value.offsetHeight - 28

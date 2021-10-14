@@ -8,8 +8,8 @@
       <section>
         <h2 class="font-semibold mt-4" text="xl true-gray-700 dark:true-gray-500">Start</h2>
         <div class="actions mt-2 space-y-4">
-          <n-button class="actions--btn" text>
-            <carbon:connect class="h-4 w-4 mr-2" /> Setup a new connection
+          <n-button class="actions--btn" text @click="setupConnection">
+            <carbon:connect class="h-4 w-4 mr-2" /> Set up a new connection
           </n-button>
           <n-button class="actions--btn" text @click="addNewTab('')">
             <carbon:new-tab class="h-4 w-4 mr-2" /> New tab
@@ -21,7 +21,7 @@
       </section>
       <section class="mt-16">
         <h2 class="font-semibold mt-4" text="xl true-gray-700 dark:true-gray-500">Shortcut</h2>
-        <ul class="space-y-2 mt-2" text="dark:gray-200">
+        <ul class="space-y-2 mt-2" text="dark:true-gray-500">
           <li>New Tab: <kbd>⌥ + T</kbd></li>
           <li>Close Tab: <kbd>⌥ + W</kbd></li>
           <li>Save Queries: <kbd>⌘ + S</kbd></li>
@@ -48,6 +48,10 @@ const addNewTab = (query: string) => {
 
 const selectQueries = () => {
   asideStore.activeMenu = 'SQL Queries'
+}
+
+const setupConnection = () => {
+  asideStore.showConnectionModal = true
 }
 </script>
 

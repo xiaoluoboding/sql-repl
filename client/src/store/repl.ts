@@ -16,11 +16,11 @@ export const useReplStore = defineStore({
       name: '',
       type: 'sqlite',
       connected: false,
-      activeDB: 'employees',
+      activeDB: '',
     },
     tableInfo: {
       sqlQueries: '',
-      activeTable: 'employees',
+      activeTable: '',
       tableColumns: [],
       manualRun: false,
     },
@@ -39,7 +39,7 @@ export const useReplStore = defineStore({
         console.warn('Database already connected')
         return
       }
-      const res = await connectDB(this.databaseInfo.activeDB)
+      const res = await connectDB(encodeURIComponent(this.databaseInfo.name))
       this.databaseInfo.name = res.db.name
       this.databaseInfo.connected = !!res
     },

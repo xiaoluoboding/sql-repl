@@ -38,7 +38,8 @@ class SqliteServer {
     const { database } = SqliteServer.getRequestParams(ctx, next)
     console.log(database)
     this.db = new SqliteClient({
-      database: resolve(__dirname, './employees.db'),
+      // database: resolve(__dirname, './employees.db'),
+      database: resolve(__dirname, database),
     })
     this.isConnecting = this.db.db.open
 

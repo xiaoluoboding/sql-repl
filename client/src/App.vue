@@ -9,7 +9,7 @@
       <Header />
       <Splitpanes class="default-theme">
         <Pane size="20" min-size="0" max-size="30">
-          <Aside />
+          <AsidePanel />
         </Pane>
         <Pane size="80">
           <QuerySelector />
@@ -37,7 +37,7 @@ import { computed } from 'vue'
 import { NConfigProvider, darkTheme } from 'naive-ui'
 
 import Header from './views/Header.vue'
-import Aside from './views/Aside.vue'
+import AsidePanel from './views/aside-panel/index.vue'
 import ReplEditor from './views/ReplEditor.vue'
 import QuerySelector from './views/QuerySelector.vue'
 import TableView from './views/TableView.vue'
