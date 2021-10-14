@@ -49,3 +49,5 @@ router.get(`${baseUrl}/sqlite/getTableColumns/:sql`, sqliteServer.getTableColumn
 // execute sqlite query
 router.get(`${baseUrl}/sqlite/execSQL`, (ctx) => routerHint(ctx, 'query'))
 router.get(`${baseUrl}/sqlite/execSQL/:sql`, sqliteServer.retriveResult.bind(sqliteServer))
+
+router.post(`${baseUrl}/sqlite/uploadDatabase`, sqliteServer.uploadDatabase.bind(sqliteServer))

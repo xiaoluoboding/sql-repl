@@ -17,6 +17,7 @@
     "dotenv": "^10.0.0",
     "kcors": "^2.2.2",
     "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
     "log4js": "^6.3.0"

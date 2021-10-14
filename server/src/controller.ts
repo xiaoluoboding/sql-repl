@@ -75,11 +75,20 @@ class SqliteServer {
     const stmt = this.db.execSQL(sql)
     const res = stmt.all()
 
-    logger.info('sqlit3 execute query successed')
+    logger.info('sqlite3 execute query successed')
 
     ctx.body = {
       total: res.length,
       data: res,
+    }
+  }
+
+  uploadDatabase(ctx, next) {
+    const file = ctx.request.files.file
+    ctx.body = {
+      data: {
+        file
+      },
     }
   }
 }

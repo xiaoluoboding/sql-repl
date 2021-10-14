@@ -1,6 +1,8 @@
 import Koa from 'koa'
+import body from 'koa-body'
 import bodyParser from 'koa-bodyparser'
 import cors from 'kcors'
+import path from 'path'
 
 import { logger } from './src/logger'
 import { router } from './src/router'
@@ -30,6 +32,14 @@ app.use(cors({ origin: '*' }))
 
 // For managing body. We're only allowing json.
 app.use(bodyParser({ enableTypes: ['json'] }))
+
+app.use(body({
+  multipart: true,
+  formidable: {
+    uploadDir: path.join(__dirname, 'public/database'),
+    keepExtensions: true
+  }
+}))
 
 app.use(router.routes())
 app.use(router.allowedMethods())
