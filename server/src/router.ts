@@ -42,9 +42,11 @@ router.get(`${baseUrl}/datetime`, ctx => {
 router.get(`${baseUrl}/sqlite/connectDB`, (ctx) => routerHint(ctx, 'query'))
 router.get(`${baseUrl}/sqlite/connectDB/:database`, sqliteServer.connectDB.bind(sqliteServer))
 
+router.get(`${baseUrl}/sqlite/getDBSchema`, sqliteServer.getDBSchema.bind(sqliteServer))
+
 // get sqlite table columns
 router.get(`${baseUrl}/sqlite/getTableColumns`, (ctx) => routerHint(ctx, 'query'))
-router.get(`${baseUrl}/sqlite/getTableColumns/:sql`, sqliteServer.getTableColumns.bind(sqliteServer))
+router.get(`${baseUrl}/sqlite/getTableColumns/:table`, sqliteServer.getTableColumns.bind(sqliteServer))
 
 // execute sqlite query
 router.get(`${baseUrl}/sqlite/execSQL`, (ctx) => routerHint(ctx, 'query'))

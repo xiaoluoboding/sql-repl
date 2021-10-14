@@ -1,12 +1,15 @@
 ### datetime
 GET http://localhost:3232/api/v1/datetime
 
-### [SQLite] 创建库链接
-# GET http://localhost:3232/api/v1/sqlite/connectDB/employees
-GET http://localhost:3232/api/v1/sqlite/connectDB/%2FUsers%2Fxiaoyunwei%2FGitHub%2Fprivate%2Fsql-repl%2Fserver%2Fpublic%2Fdatabase%2Fupload_94c58d2f117aac8e97a8f83a34527950.db
+### [SQLite] 创建库连接
+GET http://localhost:3232/api/v1/sqlite/connectDB/employees
+# GET http://localhost:3232/api/v1/sqlite/connectDB/%2FUsers%2Fxiaoyunwei%2FGitHub%2Fprivate%2Fsql-repl%2Fserver%2Fpublic%2Fdatabase%2Fupload_94c58d2f117aac8e97a8f83a34527950.db
+
+### [SQLite] 获取数据库 Schema
+GET http://localhost:3232/api/v1/sqlite/getDBSchema
 
 ### [SQLite] 查询表结构
-GET http://localhost:3232/api/v1/sqlite/getTableColumns/select%20*%20from%20employees
+GET http://localhost:3232/api/v1/sqlite/getTableColumns/employees
 
 ### [SQLite] 查询 SQL
 GET http://localhost:3232/api/v1/sqlite/execSQL/select%20*%20from%20employees%20e%20where%20e.salary%20%3E%2018000
