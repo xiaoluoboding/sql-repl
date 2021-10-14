@@ -2,11 +2,14 @@
   <h1 class="p-2 border-b border-$border-color font-semibold text-gray-700 dark:text-true-gray-200">
     Database Connections
   </h1>
-  <div class="aside-menu--tablecols p-4" v-if="treeData && treeData.length > 0">
+  <div
+    v-if="replStore.dbSchemaTree && replStore.dbSchemaTree.length > 0"
+    class="aside-menu--tablecols p-4"
+  >
     <NTree
-      default-expand-all
+      :default-expanded-keys="expandedKeys"
       block-line
-      :data="treeData"
+      :data="replStore.dbSchemaTree"
     />
   </div>
   <div class="aside-menu--actions p-4 absolute left-0 bottom-0 w-full">
@@ -40,10 +43,9 @@
 </template>
 
 <script lang="ts" setup>
-import { h, ref, watch, nextTick } from 'vue'
+import { computed } from 'vue'
 import { useMessage } from 'naive-ui'
 
-import { AnyRecord } from '../../types'
 import { useReplStore } from '../../store/repl'
 import { useAsideStore } from '../../store/aside'
 
@@ -51,22 +53,10 @@ const replStore = useReplStore()
 const asideStore = useAsideStore()
 
 const message = useMessage()
-const treeData = ref<AnyRecord[]>([])
-
-// init the table views without data
-const initTableColumns = () => {
-  return replStore.tableInfo.tableColumns.map((item: any) => {
-    return {
-      label: item.name,
-      key: item.column,
-      suffix: () => h(
-        'div',
-        {},
-        { default: () => item.type }
-      )
-    }
-  })
-}
+const expandedKeys = computed(() => {
+  const dbName = replStore.databaseInfo.activeDB
+  return [dbName]
+})
 
 const handleUploaded = async ({ file, event }: any) => {
   const res = JSON.parse(event.target.response)
@@ -78,24 +68,10 @@ const handleUploaded = async ({ file, event }: any) => {
   replStore.databaseInfo.activeDB = filename
   replStore.tableInfo.activeTable = filename
   replStore.databaseInfo.name = res.data.file.path
-  console.log(JSON.parse(event.target.response))
+  replStore.databaseInfo.connected = false
   await replStore.connectDatabase()
-  await replStore.initTableColumns()
+  await replStore.getDBSchema()
   message.success(`Database ${file.name} Connected Successfully!`)
   asideStore.showConnectionModal = false
 }
-
-watch(
-  () => replStore.tableInfo.tableColumns,
-  () => {
-  const tableName = replStore.tableInfo.activeTable
-  const tableColumns = initTableColumns()
-  
-  nextTick(() => {
-    treeData.value = [{
-      label: tableName,
-      children: tableColumns
-    }]
-  })
-})
 </script>

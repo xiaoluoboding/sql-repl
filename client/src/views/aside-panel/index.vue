@@ -19,12 +19,14 @@
       </div>
     </div>
     <div class="aside-menu--content relative w-full">
-      <template  v-if="asideStore.activeMenu === 'connections'">
-        <Connections />
-      </template>
-      <template v-else>
-        <SavedQueries />
-      </template>
+      <KeepAlive>
+        <template v-if="asideStore.activeMenu === 'connections'">
+          <Connections />
+        </template>
+        <template v-else>
+          <SavedQueries />
+        </template>
+      </KeepAlive>
     </div>
   </aside>
 </template>

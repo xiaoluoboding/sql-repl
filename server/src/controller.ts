@@ -38,8 +38,8 @@ class SqliteServer {
     const { database } = SqliteServer.getRequestParams(ctx, next)
     console.log(database)
     this.db = new SqliteClient({
-      database: resolve(__dirname, './employees.db'),
-      // database: resolve(__dirname, database),
+      // database: resolve(__dirname, './employees.db'),
+      database: resolve(__dirname, database),
     })
     this.isConnecting = this.db.db.open
 
@@ -66,8 +66,6 @@ class SqliteServer {
     `
     const stmt = this.db.execSQL(getSchemaSql)
     const res = stmt.all()
-    logger.info(stmt)
-    logger.info(res)
 
     ctx.body = {
       total: res.length,
@@ -101,12 +99,14 @@ class SqliteServer {
 
     const stmt = this.db.execSQL(sql)
     const res = stmt.all()
+    const columns = stmt.columns()
 
     logger.info('sqlite3 execute query successed')
 
     ctx.body = {
       total: res.length,
       data: res,
+      columns
     }
   }
 
