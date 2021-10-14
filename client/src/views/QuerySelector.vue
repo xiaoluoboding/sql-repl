@@ -103,6 +103,10 @@ useShortcut({
   '⌥+w, alt+w': debounce(() => {
     console.log('⌥+w')
     handleRemoveQuery()
+  }, 333),
+  '⌥+t, alt+t': debounce(() => {
+    console.log('⌥+t')
+    handleAddQuery('')
   }, 333)
 })
 </script>
