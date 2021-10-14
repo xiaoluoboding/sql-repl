@@ -20,7 +20,7 @@ import { AnyRecord } from '../types'
 import { useShortcut } from '../composables/useShortcut'
 import { useReplStore } from '../store/repl'
 
-const store = useReplStore()
+const replStore = useReplStore()
 const message = useMessage()
 
 const tableviewRef = ref()
@@ -55,7 +55,7 @@ const tableMaxHeight = ref(0)
 // init the table views without data
 const formatTableColumns = async () => {
   // TODO sorter map with column type
-  columns.value = store.tableInfo.tableColumns.map((item: any) => {
+  columns.value = replStore.tableInfo.tableColumns.map((item: any) => {
     return {
       title: item.column,
       key: item.column,
@@ -65,13 +65,13 @@ const formatTableColumns = async () => {
 }
 
 const getTableData = async () => {
-  const params = encodeURIComponent(store.tableInfo.sqlQueries)
+  const params = encodeURIComponent(replStore.tableInfo.sqlQueries)
   data.value = await execSQL(params)
   pagination.value.page = 1
 }
 
 debouncedWatch(
-  () => store.tableInfo.manualRun,
+  () => replStore.tableInfo.manualRun,
   getTableData,
   {
     deep: true,
@@ -87,8 +87,9 @@ useShortcut({
 })
 
 onMounted(async () => {
-  await store.connectDatabase()
-  await store.initTableColumns()
+  replStore.databaseInfo.connected = false
+  await replStore.connectDatabase()
+  await replStore.initTableColumns()
   await formatTableColumns()
   await getTableData()
   tableMaxHeight.value = tableviewRef.value.offsetHeight - 28

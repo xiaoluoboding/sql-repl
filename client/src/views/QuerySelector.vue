@@ -74,8 +74,8 @@ const handleSelectQuery = (query: TabInfo) => {
 
 
 const initQueries = `select *
-from employees e
-where e.salary > 20000`
+from ${replStore.databaseInfo.activeDB}
+limit 10`
 
 if (tabsStore.queryTabs.length === 0) {
   handleAddQuery(initQueries)

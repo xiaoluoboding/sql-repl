@@ -31,10 +31,33 @@
           />
         </div>
         <div class="aside-menu--actions p-4 absolute left-0 bottom-0 w-full">
-          <n-button ghost class="w-full">
+          <n-button ghost class="w-full" @click="showModal = true">
             {{$t('button.create_connection')}}
           </n-button>
         </div>
+        <n-modal
+          v-model:show="showModal"
+          preset="dialog"
+          :mask-closable="false"
+          :title="$t('button.create_connection')"
+        >
+          <n-upload
+            action="http://localhost:3232/api/v1/sqlite/uploadDatabase"
+            accept=".db,.sqlite,.sqlite3"
+            with-credentials
+            class="w-full py-8"
+            @finish="handleUploaded"
+          >
+            <n-upload-dragger>
+              <div class="mb-4">
+                <carbon:upload class="h-6 w-6" />
+              </div>
+              <div class="text-xl mb-4">
+                Drop database file here or click to upload
+              </div>
+            </n-upload-dragger>
+          </n-upload>
+        </n-modal>
       </template>
       <template v-else>
         <h1 class="p-2 border-b border-$border-color font-semibold text-gray-700 dark:text-true-gray-200">
@@ -73,6 +96,7 @@ const replStore = useReplStore()
 const tabsStore = useTabsStore()
 const asideStore = useAsideStore()
 
+const showModal = ref(false)
 const queries = computed(() => {
   return asideStore.savedQueries.filter(query => query.queries !== '')
 })
@@ -95,6 +119,19 @@ const initTableColumns = () => {
 const handleSelectQuery = (query: TabInfo) => {
   replStore.tableInfo.sqlQueries = query.queries || ''
   tabsStore.addTab(query.queries || '')
+}
+
+const handleUploaded = ({ file, event }: any) => {
+  const res = JSON.parse(event.target.response)
+  const getFilename = (filename: string): string => {
+    const res = filename.match(/(.+?)(\.[^.]*$|$)/) || []
+    return res.length > 0 ? res[res.length - 2] : filename
+  }
+  const filename = getFilename(file.name)
+  replStore.databaseInfo.activeDB = filename
+  replStore.tableInfo.activeTable = filename
+  replStore.databaseInfo.name = res.data.file.path
+  console.log(JSON.parse(event.target.response))
 }
 
 watch(

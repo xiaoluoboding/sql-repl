@@ -62,12 +62,6 @@ const themeOverrides = {
     primaryColorSuppl: '#0284c7'
   }
 }
-
-document.addEventListener('keydown', (e) => {
-  if (e.metaKey && e.key === 'w') {
-    e.preventDefault()
-  }
-})
 </script>
 
 <style>
