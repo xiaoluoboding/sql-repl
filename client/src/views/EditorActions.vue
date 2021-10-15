@@ -6,6 +6,14 @@
     <div class="actions flex flex-col items-center space-y-2">
       <n-tooltip placement="left-center">
         <template #trigger>
+          <button class="actions--btn" @click="handleCopySQL">
+            <carbon:copy class="h-4 w-4" />
+          </button>
+        </template>
+        {{ $t('button.copy-sql-queries') }}
+      </n-tooltip>
+      <n-tooltip placement="left-center">
+        <template #trigger>
           <button class="actions--btn" @click="handleSaveSQL">
             <carbon-save class="h-4 w-4" />
           </button>
@@ -42,7 +50,7 @@
 
 <script lang="ts" setup>
 import { nextTick, ref } from 'vue'
-import { debouncedWatch } from '@vueuse/core'
+import { debouncedWatch, useClipboard } from '@vueuse/core'
 import { useMessage } from 'naive-ui'
 
 import { useShortcut } from '../composables/useShortcut'
@@ -55,6 +63,10 @@ const replStore = useReplStore()
 const tabsStore = useTabsStore()
 const asideStore = useAsideStore()
 
+const { copy } = useClipboard({
+  source: replStore.tableInfo.sqlQueries
+})
+
 const showModal = ref(false)
 
 const doSaveSQL = () => {
@@ -65,6 +77,11 @@ const doSaveSQL = () => {
     queries: replStore.tableInfo.sqlQueries
   })
   message.success('Saved!')
+}
+
+const handleCopySQL = () => {
+  copy()
+  message.success('Copied to clipboard!')
 }
 
 const handleSaveSQL = () => {

@@ -16,6 +16,7 @@ button:
   create_connection: New Connection
   run_sql_queries: Run SQL Queries（⌘E）
   save_sql_queries: Save SQL Queries（⌘S）
+  copy-sql-queries: Copy SQL Queries
 modal:
   save_title: Save SQL Queries
   save_placeholder: SQL Queries Alias Name

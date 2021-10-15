@@ -15,7 +15,7 @@
     @click="handleSelectQuery(query)"
   >
     <label class="block w-full flex items-center font-semibold">
-      <carbon:code class="h-4 w-4 mr-2" /> {{query.label}}
+      <simple-icons:sqlite class="h-4 w-4 mr-2" /> {{query.label}}
     </label>
     <time class="block w-full flex items-center mt-2">
       <carbon:time class="h-4 w-4 mr-2" /> {{query.savedAt}}
