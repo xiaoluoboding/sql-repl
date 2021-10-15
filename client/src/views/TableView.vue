@@ -2,10 +2,12 @@
   <div class="table-view bg-white dark:bg-true-gray-900 h-full" ref="tableviewRef">
     <n-data-table
       size="mini"
+      :bordered="false"
       :columns="tableColumns"
       :data="tableData"
-      :pagination="pagination"
-      :max-height="tableMaxHeight"
+      :pagination="tableData.length === 0 ? false : pagination"
+      flex-height
+      :style="{height: `${tableMaxHeight}px`}"
     >
       <template #empty>
         <div class="p-20 text-gray-100 dark:text-true-gray-700">
@@ -24,7 +26,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, h } from 'vue'
-import { debouncedWatch } from '@vueuse/core'
+import { debouncedWatch, useResizeObserver } from '@vueuse/core'
 import { useMessage } from 'naive-ui'
 
 import { execSQL } from '../utils/services'
@@ -114,8 +116,10 @@ useShortcut({
   }
 })
 
-onMounted(async () => {
-  tableMaxHeight.value = tableviewRef.value.offsetHeight - 28
+useResizeObserver(tableviewRef, (entries) => {
+  const entry = entries[0]
+  const { height } = entry.contentRect
+  tableMaxHeight.value = height - 28 - 18
 })
 </script>
 
