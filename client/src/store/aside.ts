@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 import type { TabInfo } from './tabs'
 
-type MENUS = 'connections' | 'SQL Queries'
+type MENUS = 'connections' | 'savedQueries'
 
 export const useAsideStore = defineStore({
   id: 'replAside',

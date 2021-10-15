@@ -1,5 +1,5 @@
 <template>
-  <nav class="header-nav bg-white dark:bg-true-gray-900">
+  <nav class="header-nav bg-blue-gray-50 dark:bg-true-gray-900">
     <h1
       class="flex justify-center items-center"
       text="gray-900 dark:blue-gray-100"
@@ -67,7 +67,7 @@ const toggleDarkmode = () => {
 
 .actions--btn {
   @apply my-0 mx-1 p-2;
-  @apply hover:bg-gray-100 hover:dark:bg-true-gray-800;
+  @apply hover:bg-blue-gray-200 hover:dark:bg-true-gray-800;
   @apply rounded-md outline-transparent;
   @apply h-9;
 }

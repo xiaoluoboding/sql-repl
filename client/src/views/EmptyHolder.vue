@@ -47,7 +47,7 @@ const addNewTab = (query: string) => {
 }
 
 const selectQueries = () => {
-  asideStore.activeMenu = 'SQL Queries'
+  asideStore.activeMenu = 'savedQueries'
 }
 
 const setupConnection = () => {

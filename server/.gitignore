@@ -13,3 +13,4 @@ chromium
 logs
 fonts
 logs
+public/database/upload*

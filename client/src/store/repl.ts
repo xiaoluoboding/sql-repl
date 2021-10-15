@@ -27,7 +27,7 @@ export const useReplStore = defineStore({
       type: 'sqlite',
       connected: false,
       activeDB: '',
-      schemas: [] as SQLITE_DB_SCHEMA[]
+      schemas: [] as SQLITE_DB_SCHEMA[],
     },
     tableInfo: {
       sqlQueries: '',
@@ -66,7 +66,8 @@ export const useReplStore = defineStore({
         {
           label: dbName,
           key: `root-${dbName}`,
-          suffix: () => h('div', {}, { default: () => `(${tableColumns.length})` }),
+          suffix: () =>
+            h('div', {}, { default: () => `(${tableColumns.length})` }),
           children: tableColumns,
         },
       ]
@@ -75,10 +76,10 @@ export const useReplStore = defineStore({
       const dbSchemas = state.databaseInfo.schemas
       let schema = {} as any
 
-      const tables = dbSchemas.map((table) => ({ label: table.name }))
+      const tables = dbSchemas.map((table) => ({ label: table.name.toLowerCase() }))
 
       dbSchemas.forEach((table) => {
-        schema[table.name] = table.columns.map((col) => ({ label: col.name }))
+        schema[table.name.toLowerCase()] = table.columns.map((col) => ({ label: col.name.toLowerCase() }))
       })
 
       return {
@@ -86,6 +87,9 @@ export const useReplStore = defineStore({
         schema,
       }
     },
+    expandedKeys: (state) => {
+      return [`root-${state.databaseInfo.activeDB}`]
+    }
   },
 
   actions: {

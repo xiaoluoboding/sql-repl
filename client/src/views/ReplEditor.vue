@@ -26,19 +26,5 @@ const replStore = useReplStore()
   &--codemirror {
     @apply flex-1;
   }
-
-  &--actions {
-    @apply h-full w-9 p-2;
-    @apply flex flex-col items-center justify-end;
-    @apply space-y-2;
-    @apply bg-blue-gray-100 dark:bg-dark-400;
-    @apply text-gray-900 dark:text-blue-gray-100;
-  }
-
-  .actions--btn {
-    @apply h-8 p-2;
-    @apply hover:bg-gray-100 hover:dark:bg-true-gray-700;
-    @apply rounded-md outline-transparent;
-  }
 }
 </style>

@@ -105,3 +105,19 @@ useShortcut({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.repl-editor--actions {
+  @apply h-full w-9 p-2;
+  @apply flex flex-col items-center justify-end;
+  @apply space-y-2;
+  @apply bg-blue-gray-100 dark:bg-dark-400;
+  @apply text-gray-900 dark:text-blue-gray-100;
+}
+
+.actions--btn {
+  @apply h-8 p-2;
+  @apply hover:bg-blue-gray-200 hover:dark:bg-true-gray-700;
+  @apply rounded-md outline-transparent;
+}
+</style>

@@ -1,5 +1,9 @@
 <template>
-  <h1 class="p-2 border-b border-$border-color font-semibold text-gray-700 dark:text-true-gray-200">
+    <h1
+      class="p-1 px-4 border-b border-$border-color font-semibold"
+      bg="blue-gray-100 dark:dark-400"
+      text="gray-700 dark:true-gray-200"
+    >
     Saved SQL Queries
   </h1>
   <div

@@ -1,5 +1,9 @@
 <template>
-  <h1 class="p-2 border-b border-$border-color font-semibold text-gray-700 dark:text-true-gray-200">
+  <h1
+    class="p-1 px-4 border-b border-$border-color font-semibold"
+    bg="blue-gray-100 dark:dark-400"
+    text="gray-700 dark:true-gray-200"
+  >
     Database Connections
   </h1>
   <div
@@ -7,9 +11,9 @@
     class="aside-menu--tablecols p-4"
   >
     <NTree
-      :default-expanded-keys="expandedKeys"
       block-line
       :data="replStore.dbSchemaTree"
+      :default-expanded-keys="replStore.expandedKeys"
     />
   </div>
   <div class="aside-menu--actions p-4 absolute left-0 bottom-0 w-full">
@@ -24,10 +28,10 @@
     :title="$t('button.create_connection')"
   >
     <n-upload
-      action="http://localhost:3232/api/v1/sqlite/uploadDatabase"
+      :action="uploadAction"
       accept=".db,.sqlite,.sqlite3"
-      with-credentials
       class="w-full py-8"
+      with-credentials
       @finish="handleUploaded"
     >
       <n-upload-dragger class="w-full">
@@ -50,15 +54,14 @@ import { useMessage } from 'naive-ui'
 
 import { useReplStore } from '../../store/repl'
 import { useAsideStore } from '../../store/aside'
+import { LOCAL_HOST } from '../../constants/config'
 
 const replStore = useReplStore()
 const asideStore = useAsideStore()
 
 const message = useMessage()
-const expandedKeys = computed(() => {
-  const dbName = `root-${replStore.databaseInfo.activeDB}`
-  return [dbName]
-})
+const expandedKeys = computed(() => [`root-${replStore.databaseInfo.activeDB}`])
+const uploadAction = `${LOCAL_HOST}/api/v1/sqlite/uploadDatabase`
 
 const handleUploaded = async ({ file, event }: any) => {
   const res = JSON.parse(event.target.response)
