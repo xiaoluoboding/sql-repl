@@ -2,6 +2,10 @@
 
 Just a SQL REPL Tools for web.
 
+## 🖼️ Preview
+
+![preview](preview.png)
+
 ## ✨ Features
 
 * 🔍 SQL query editor with syntax highlighting
