@@ -68,7 +68,7 @@ const doSaveSQL = () => {
 }
 
 const handleSaveSQL = () => {
-  if (tabsStore.activeTab.label === 'Untitled') {
+  if (/Untitled/.test(tabsStore.activeTab.label)) {
     showModal.value = true
   } else {
     doSaveSQL()

@@ -37,7 +37,7 @@ export const useTabsStore = defineStore({
   },
 
   actions: {
-    addTab(queries: string) {
+    addTab(label: string, queries: string) {
       const id = shortid()
       const idx =
         this.queryTabs.length === 0
@@ -46,7 +46,7 @@ export const useTabsStore = defineStore({
       const newTab = {
         id,
         idx,
-        label: 'Untitled',
+        label: label ? label : `Untitled-${idx}`,
         isSaved: true,
         savedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
         queries,
@@ -69,7 +69,7 @@ export const useTabsStore = defineStore({
         this.activeTab = {
           id: shortid(),
           idx: 0,
-          label: 'Untitled',
+          label: 'Untitled-1',
           isSaved: true,
           savedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
           queries: '',

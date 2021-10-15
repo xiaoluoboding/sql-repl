@@ -43,7 +43,7 @@ const queries = computed(() => {
 
 const handleSelectQuery = (query: TabInfo) => {
   replStore.tableInfo.sqlQueries = query.queries || ''
-  tabsStore.addTab(query.queries || '')
+  tabsStore.addTab(query.label, query.queries || '')
 }
 
 const handleRemoveQuery = (query: TabInfo) => {
@@ -55,7 +55,7 @@ const handleRemoveQuery = (query: TabInfo) => {
 .saved-queries {
   .close--btn {
     @apply absolute right-2 top-2 hidden;
-    @apply hover:bg-gray-200 hover:dark:bg-dark-300;;
+    @apply hover:bg-gray-200 dark:hover:bg-dark-300;;
   }
   &:hover {
     .close--btn {

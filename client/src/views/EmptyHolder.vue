@@ -43,7 +43,7 @@ const asideStore = useAsideStore()
 
 const addNewTab = (query: string) => {
   replStore.tableInfo.sqlQueries = query
-  tabsStore.addTab(query)
+  tabsStore.addTab('', query)
 }
 
 const selectQueries = () => {

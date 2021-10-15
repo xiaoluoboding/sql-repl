@@ -13,7 +13,7 @@
         <carbon:code class="h-4 w-4" />
       </span>
       <span class="label">
-        {{ query.label }}-{{query.idx}}
+        {{ query.label }}
       </span>
       <template v-if="enterTabIdx === query.idx">
         <span class="suffix" @click="handleRemoveQuery()">
@@ -57,7 +57,7 @@ const tabsStore = useTabsStore()
 
 const handleAddQuery = (query: string) => {
   replStore.tableInfo.sqlQueries = query
-  tabsStore.addTab(query)
+  tabsStore.addTab('', query)
 }
 
 const handleRemoveQuery = () => {
