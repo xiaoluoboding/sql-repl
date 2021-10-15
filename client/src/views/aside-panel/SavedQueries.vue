@@ -5,7 +5,7 @@
   <div
     v-for="query in queries"
     :key="query.id"
-    class="m-2 p-2 cursor-pointer bg-true-gray-800"
+    class="saved-queries relative m-2 p-2 cursor-pointer bg-true-gray-800"
     text="[14px] gray-700 dark:true-gray-400"
     bg="blue-gray-100 dark:true-gray-800"
     @click="handleSelectQuery(query)"
@@ -16,6 +16,9 @@
     <time class="block w-full flex items-center mt-2">
       <carbon:time class="h-4 w-4 mr-2" /> {{query.savedAt}}
     </time>
+    <span class="close--btn" @click.stop="handleRemoveQuery(query)">
+      <carbon:close class="icon" />
+    </span>
   </div>
 </template>
 
@@ -38,4 +41,22 @@ const handleSelectQuery = (query: TabInfo) => {
   replStore.tableInfo.sqlQueries = query.queries || ''
   tabsStore.addTab(query.queries || '')
 }
+
+const handleRemoveQuery = (query: TabInfo) => {
+  asideStore.removeQuery(query)
+}
 </script>
+
+<style lang="scss" scoped>
+.saved-queries {
+  .close--btn {
+    @apply absolute right-2 top-2 hidden;
+    @apply hover:bg-gray-200 hover:dark:bg-dark-300;;
+  }
+  &:hover {
+    .close--btn {
+      display: block;
+    }
+  }
+}
+</style>

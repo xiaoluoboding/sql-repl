@@ -30,12 +30,14 @@
       class="w-full py-8"
       @finish="handleUploaded"
     >
-      <n-upload-dragger>
-        <div class="mb-4">
+      <n-upload-dragger class="w-full">
+        <div class="flex justify-center mb-4">
           <carbon:upload class="h-6 w-6" />
         </div>
         <div class="text-xl mb-4">
-          Drop database file here or click to upload
+          <p>Drop database file here</p>
+          <p>or</p>
+          <p>Click to upload</p>
         </div>
       </n-upload-dragger>
     </n-upload>
@@ -54,7 +56,7 @@ const asideStore = useAsideStore()
 
 const message = useMessage()
 const expandedKeys = computed(() => {
-  const dbName = replStore.databaseInfo.activeDB
+  const dbName = `root-${replStore.databaseInfo.activeDB}`
   return [dbName]
 })
 
@@ -75,3 +77,9 @@ const handleUploaded = async ({ file, event }: any) => {
   asideStore.showConnectionModal = false
 }
 </script>
+
+<style lang="scss">
+.n-upload-trigger {
+  @apply w-full;
+}
+</style>

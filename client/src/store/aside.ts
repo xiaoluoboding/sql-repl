@@ -25,6 +25,12 @@ export const useAsideStore = defineStore({
 
       this.activeQuery = payload
     },
+    removeQuery(payload: TabInfo) {
+      this.savedQueries.splice(
+        this.savedQueries.findIndex((tab) => tab.id === payload.id),
+        1
+      )
+    },
     upsertQueries(payload: TabInfo) {
       const idx = this.savedQueries.findIndex((item) => item.id === payload.id)
       if (this.savedQueries.length === 0 || idx === -1) {

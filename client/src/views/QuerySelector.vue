@@ -13,7 +13,7 @@
         <carbon:code class="h-4 w-4" />
       </span>
       <span class="label">
-        {{ query.label }} #{{query.idx}}
+        {{ query.label }}-{{query.idx}}
       </span>
       <template v-if="enterTabIdx === query.idx">
         <span class="suffix" @click="handleRemoveQuery()">
@@ -72,23 +72,16 @@ const handleSelectQuery = (query: TabInfo) => {
   replStore.tableInfo.sqlQueries = query.queries
 }
 
+// const initQueries = `select *
+// from ${replStore.databaseInfo.activeDB}
+// limit 10`
 
-const initQueries = `select *
-from ${replStore.databaseInfo.activeDB}
-limit 10`
-
-if (tabsStore.queryTabs.length === 0) {
-  // handleAddQuery(initQueries)
-  // tabsStore.setActiveTab(tabsStore.queryTabs[0])
-} else {
-  tabsStore.setActiveTab(tabsStore.activeTab)
-}
+tabsStore.setActiveTab(tabsStore.activeTab)
 
 // update queries in right tab
 debouncedWatch(
   () => replStore.tableInfo.sqlQueries,
   (newVal) => {
-    console.log(newVal)
     tabsStore.updateTab({
       queries: newVal
     })

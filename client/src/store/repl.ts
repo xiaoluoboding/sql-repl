@@ -65,7 +65,8 @@ export const useReplStore = defineStore({
       return [
         {
           label: dbName,
-          key: dbName,
+          key: `root-${dbName}`,
+          suffix: () => h('div', {}, { default: () => `(${tableColumns.length})` }),
           children: tableColumns,
         },
       ]
