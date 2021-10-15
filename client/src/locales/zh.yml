@@ -7,15 +7,27 @@ common:
   save: 保存
   run: 运行
   cancel: 取消
+  start: 开始
+  shortcut: 快捷键
 button:
   toggle_dark: 切换深色模式
   toggle_langs: 切换语言
   options: 应用设置
   create_connection: 创建数据连接
-  run_sql_queries: 执行SQL语句（⌘E）
+  run_sql_queries: 执行查询语句（⌘E）
   save_sql_queries: 保存查询语句（⌘S）
 modal:
   save_title: 保存查询语句
   save_placeholder: 查询语句别名
 home:
   app_name: SQL REPL
+aside:
+  database-connections: 数据库连接
+  saved_sql_queries: 查询语句管理
+app:
+  set-up-a-new-connection: 设置新的数据库连接
+  new-tab: 新建标签页
+  select-queries: 从左侧查询语句面板选择
+  close-tab: 关闭标签页
+  save-queries: 保存查询语句
+  run-queries: 执行查询语句

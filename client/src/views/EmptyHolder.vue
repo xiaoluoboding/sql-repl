@@ -6,26 +6,26 @@
     <main>
       <h1 class="font-bold" text="3xl true-gray-900 dark:true-gray-400">SQL REPL</h1>
       <section>
-        <h2 class="font-semibold mt-4" text="xl true-gray-700 dark:true-gray-500">Start</h2>
-        <div class="actions mt-2 space-y-4">
+        <h2 class="font-semibold mt-4" text="xl true-gray-700 dark:true-gray-500">{{ $t('common.start') }}</h2>
+        <div class="actions mt-4 space-y-4">
           <n-button class="actions--btn" text @click="setupConnection">
-            <carbon:connect class="h-4 w-4 mr-2" /> Set up a new connection
+            <carbon:connect class="h-4 w-4 mr-2" /> {{ $t('app.set-up-a-new-connection') }}
           </n-button>
           <n-button class="actions--btn" text @click="addNewTab('')">
-            <carbon:new-tab class="h-4 w-4 mr-2" /> New tab
+            <carbon:new-tab class="h-4 w-4 mr-2" /> {{ $t('app.new-tab') }}
           </n-button>
           <n-button class="actions--btn" text @click="selectQueries">
-            <carbon:query-queue class="h-4 w-4 mr-2" /> Select the saved queries from left bar.
+            <carbon:query-queue class="h-4 w-4 mr-2" /> {{ $t('app.select-queries') }}.
           </n-button>
         </div>
       </section>
       <section class="mt-16">
-        <h2 class="font-semibold mt-4" text="xl true-gray-700 dark:true-gray-500">Shortcut</h2>
-        <ul class="space-y-2 mt-2" text="dark:true-gray-500">
-          <li>New Tab: <kbd>⌥ + T</kbd></li>
-          <li>Close Tab: <kbd>⌥ + W</kbd></li>
-          <li>Save Queries: <kbd>⌘ + S</kbd></li>
-          <li>Run Queries: <kbd>⌘ + E</kbd></li>
+        <h2 class="font-semibold mt-4" text="xl true-gray-700 dark:true-gray-500">{{ $t('common.shortcut') }}</h2>
+        <ul class="space-y-2 mt-4" text="dark:true-gray-500">
+          <li>{{ $t('app.new-tab') }}: <kbd>⌥ + T</kbd></li>
+          <li>{{ $t('app.close-tab') }}: <kbd>⌥ + W</kbd></li>
+          <li>{{ $t('app.save-queries') }}: <kbd>⌘ + S</kbd></li>
+          <li>{{ $t('app.run-queries') }}: <kbd>⌘ + E</kbd></li>
         </ul>
       </section>
     </main>

@@ -4,7 +4,7 @@
       bg="blue-gray-100 dark:dark-400"
       text="gray-700 dark:true-gray-200"
     >
-    Saved SQL Queries
+    {{ $t('aside.saved_sql_queries') }}
   </h1>
   <div
     v-for="query in queries"

@@ -7,6 +7,8 @@ common:
   save: Save
   run: Run
   cancel: Cancel
+  start: Start
+  shortcut: Shortcut
 button:
   toggle_dark: Toggle dark mode
   toggle_langs: Change languages
@@ -19,3 +21,13 @@ modal:
   save_placeholder: SQL Queries Alias Name
 home:
   app_name: SQL REPL
+aside:
+  database-connections: Database Connections
+  saved_sql_queries: Saved SQL Queries
+app:
+  set-up-a-new-connection: Set up a new connection
+  new-tab: New Tab
+  select-queries: Select the saved queries from left bar
+  close-tab: Close Tab
+  save-queries: Save Queries
+  run-queries: Run Queries

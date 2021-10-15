@@ -4,7 +4,7 @@
     bg="blue-gray-100 dark:dark-400"
     text="gray-700 dark:true-gray-200"
   >
-    Database Connections
+    {{ $t('aside.database-connections') }}
   </h1>
   <div
     v-if="replStore.dbSchemaTree && replStore.dbSchemaTree.length > 0"
@@ -32,6 +32,7 @@
       accept=".db,.sqlite,.sqlite3"
       class="w-full py-8"
       with-credentials
+      @change="uploadChanged"
       @finish="handleUploaded"
     >
       <n-upload-dragger class="w-full">
@@ -62,6 +63,11 @@ const asideStore = useAsideStore()
 const message = useMessage()
 const expandedKeys = computed(() => [`root-${replStore.databaseInfo.activeDB}`])
 const uploadAction = `${LOCAL_HOST}/api/v1/sqlite/uploadDatabase`
+
+const uploadChanged = ({ file, event }: any) => {
+  console.log(file)
+  console.log(event)
+}
 
 const handleUploaded = async ({ file, event }: any) => {
   const res = JSON.parse(event.target.response)

@@ -118,3 +118,10 @@ onMounted(async () => {
   tableMaxHeight.value = tableviewRef.value.offsetHeight - 28
 })
 </script>
+
+<style lang="scss">
+.dark .n-data-table {
+  --th-color: #262626 !important;
+  --td-color: #171717 !important;
+}
+</style>
