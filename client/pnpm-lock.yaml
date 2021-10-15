@@ -23,7 +23,7 @@ specifiers:
   dayjs: ^1.10.7
   keymaster: ^1.6.2
   naive-ui: ^2.19.3
-  pinia: ^2.0.0-rc.12
+  pinia: ^2.0.0-rc.13
   sass: ^1.42.1
   sequelize: ^6.6.5
   splitpanes: ^3.0.6
@@ -51,7 +51,7 @@ dependencies:
   dayjs: 1.10.7
   keymaster: 1.6.2
   naive-ui: 2.19.5_vue@3.2.20
-  pinia: 2.0.0-rc.12_typescript@4.4.3+vue@3.2.20
+  pinia: 2.0.0-rc.13_typescript@4.4.3+vue@3.2.20
   sequelize: 6.6.5
   splitpanes: 3.0.6
   vue: 3.2.20
@@ -1747,10 +1747,10 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /pinia/2.0.0-rc.12_typescript@4.4.3+vue@3.2.20:
-    resolution: {integrity: sha512-1MqXgyiju5fcJBfNO+aU5GP24ZxoaC5bjosSTVnb13fJYu8CfFxCZ/XWwMoD1QnZFq6JGbYigZNCaJDL2tmzQg==}
+  /pinia/2.0.0-rc.13_typescript@4.4.3+vue@3.2.20:
+    resolution: {integrity: sha512-NLOqK+tCIx1a4qZByqLZVdAK7ilTxkG6Opmj1O8hTjxpu4VSO2+eL2pPcO3JE/4ifZ6FBx87X2DU7NTY36z7Bw==}
     peerDependencies:
-      '@vue/composition-api': ^1.2.3
+      '@vue/composition-api': ^1.2.4
       typescript: ^4.4.3
       vue: ^2.6.14 || ^3.2.0
     peerDependenciesMeta:

@@ -77,7 +77,7 @@ const formatTableColumns = (columns: any) => {
       if (/integer|float|numeric/.test(type)) {
         return aCol - bCol
       } else if (/date|datetime/.test(type)) {
-        return new Date(aCol) - new Date(bCol)
+        return (new Date(aCol) as any) - (new Date(bCol) as any)
       } else if (/text|varchar/.test(type)) {
         return 'default'
       }

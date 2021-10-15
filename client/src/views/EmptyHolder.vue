@@ -6,7 +6,7 @@
     <main>
       <h1 class="font-bold" text="3xl true-gray-900 dark:true-gray-400">SQL REPL</h1>
       <section>
-        <h2 class="font-semibold mt-4" text="xl true-gray-700 dark:true-gray-500">{{ $t('common.start') }}</h2>
+        <h2 class="font-semibold mt-4" text="xl true-gray-700 dark:true-gray-300">{{ $t('common.start') }}</h2>
         <div class="actions mt-4 space-y-4">
           <n-button class="actions--btn" text @click="setupConnection">
             <carbon:connect class="h-4 w-4 mr-2" /> {{ $t('app.set-up-a-new-connection') }}
@@ -58,6 +58,6 @@ const setupConnection = () => {
 <style lang="scss" scoped>
 .actions--btn {
   @apply flex justify-center items-center focus:outline-transparent;
-  @apply text-true-gray-700 dark:text-true-gray-500 hover:text-light-blue-400;
+  @apply text-true-gray-700 dark:text-true-gray-300 hover:text-light-blue-400;
 }
 </style>

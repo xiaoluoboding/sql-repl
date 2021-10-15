@@ -1,12 +1,14 @@
 # SQL REPL
 
-Just a SQL REPL for web.
+Just a SQL REPL Tools for web.
 
 ## ✨ Features
 
 * 🔍 SQL query editor with syntax highlighting
 * ↕️ SQL query editor with Split Panes，so you could resize it as you wish
-* 🌛 Darkmode
+* 🗒️ Table View with sorter
+* 🌛 Darkmode support
+* 🌍 i18n support
 
 SQL REPL now support connecting to the following databases:
 
@@ -20,6 +22,10 @@ SQL REPL now support connecting to the following databases:
 * better-sqlite3
 * dayjs
 * koa
+  * koa-body
+  * koa-bodyparser
+  * koa-router
+  * kcors
 * log4js
 
 ### Client
@@ -27,10 +33,13 @@ SQL REPL now support connecting to the following databases:
 * codemirror@next
 * Vue 3
 * Vite
+* pinia
 * naive-ui
 * splitpanes
 * windicss
 * vueuse
+* dayjs
+* keymaster
 
 ## 📖 Usage
 

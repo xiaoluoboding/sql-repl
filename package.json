@@ -6,9 +6,13 @@
     "install:client": "cd client && pnpm install",
     "install:server": "cd server && pnpm install",
     "postinstall": "run-p install:*",
-    "dev:server": "npm run dev --prefix server",
     "dev:client": "npm run dev --prefix client",
-    "start": "run-p dev:*"
+    "dev:server": "npm run dev --prefix server",
+    "start": "run-p dev:*",
+    "build:client": "npm run build --prefix client",
+    "build:server": "npm run build --prefix server",
+    "build": "run-p build:*",
+    "serve": "npm run serve --prefix server"
   },
   "repository": {
     "type": "git",
