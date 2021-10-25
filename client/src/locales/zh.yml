@@ -17,6 +17,8 @@ button:
   run_sql_queries: 执行查询语句（⌘E）
   save_sql_queries: 保存查询语句（⌘S）
   copy-sql-queries: 复制查询语句
+  copy-table-result: 复制数据集合到剪贴板
+  export-to-csv: 导出数据集合到CSV文件
 modal:
   save_title: 保存查询语句
   save_placeholder: 查询语句别名

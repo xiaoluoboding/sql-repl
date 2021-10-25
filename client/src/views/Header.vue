@@ -1,7 +1,7 @@
 <template>
   <nav class="header-nav bg-blue-gray-50 dark:bg-true-gray-900">
     <h1
-      class="flex justify-center items-center"
+      class="flex-center"
       text="gray-900 dark:blue-gray-100"
     >
       <!-- <img alt="logo" src="/logo.svg"> -->

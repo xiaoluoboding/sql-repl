@@ -139,7 +139,7 @@ useShortcut({
     .suffix,
     .editing,
     .prefix {
-      @apply flex items-center justify-center h-4 w-4;
+      @apply flex-center h-4 w-4;
     }
 
     input {
@@ -149,7 +149,7 @@ useShortcut({
   }
 
   &--added {
-    @apply  h-8 w-8 flex justify-center items-center;
+    @apply  h-8 w-8 flex-center;
     @apply outline-transparent focus:outline-transparent;
   }
 

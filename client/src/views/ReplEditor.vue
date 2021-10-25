@@ -6,13 +6,13 @@
         :hint-info="replStore.editorHintInfo"
       />
     </div>
-    <EditorActions />
+    <ReplEditorActions />
   </div>
 </template>
 
 <script lang="ts" setup>
 import Codemirror from '../components/Codemirror.vue'
-import EditorActions from './EditorActions.vue'
+import ReplEditorActions from './ReplEditorActions.vue'
 import { useReplStore } from '../store/repl'
 
 const replStore = useReplStore()

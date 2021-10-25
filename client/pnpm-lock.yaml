@@ -15,6 +15,7 @@ specifiers:
   '@types/codemirror': ^5.60.3
   '@types/keymaster': ^1.6.30
   '@types/node': ^16.10.1
+  '@types/papaparse': ^5.3.1
   '@types/sequelize': ^4.28.10
   '@types/splitpanes': ^2.2.1
   '@types/sql.js': ^1.4.3
@@ -23,6 +24,7 @@ specifiers:
   dayjs: ^1.10.7
   keymaster: ^1.6.2
   naive-ui: ^2.19.3
+  papaparse: ^5.3.1
   pinia: ^2.0.0-rc.13
   sass: ^1.42.1
   sequelize: ^6.6.5
@@ -51,6 +53,7 @@ dependencies:
   dayjs: 1.10.7
   keymaster: 1.6.2
   naive-ui: 2.19.5_vue@3.2.20
+  papaparse: 5.3.1
   pinia: 2.0.0-rc.13_typescript@4.4.3+vue@3.2.20
   sequelize: 6.6.5
   splitpanes: 3.0.6
@@ -64,6 +67,7 @@ devDependencies:
   '@types/codemirror': 5.60.4
   '@types/keymaster': 1.6.30
   '@types/node': 16.10.3
+  '@types/papaparse': 5.3.1
   '@types/sequelize': 4.28.10
   '@types/splitpanes': 2.2.1
   '@types/sql.js': 1.4.3
@@ -597,6 +601,12 @@ packages:
 
   /@types/node/16.10.3:
     resolution: {integrity: sha512-ho3Ruq+fFnBrZhUYI46n/bV2GjwzSkwuT4dTf0GkuNFmnb8nq4ny2z9JEVemFi6bdEJanHLlYfy9c6FN9B9McQ==}
+
+  /@types/papaparse/5.3.1:
+    resolution: {integrity: sha512-1lbngk9wty2kCyQB42LjqSa12SEop3t9wcEC7/xYr3ujTSTmv7HWKjKYXly0GkMfQ42PRb2lFPFEibDOiMXS0g==}
+    dependencies:
+      '@types/node': 16.10.3
+    dev: true
 
   /@types/sequelize/4.28.10:
     resolution: {integrity: sha512-GKbEbl6uyEYTPvU2JZvmqZHfpwTTjaZvNSd2gFJrhcxUL1bcyG7i+S8Od2L0/+skrk2bBINl7J1Sugo0mgIY3g==}
@@ -1719,6 +1729,10 @@ packages:
     dependencies:
       mimic-fn: 2.1.0
     dev: true
+
+  /papaparse/5.3.1:
+    resolution: {integrity: sha512-Dbt2yjLJrCwH2sRqKFFJaN5XgIASO9YOFeFP8rIBRG2Ain8mqk5r1M6DkfvqEVozVcz3r3HaUGw253hA1nLIcA==}
+    dev: false
 
   /path-is-absolute/1.0.1:
     resolution: {integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=}

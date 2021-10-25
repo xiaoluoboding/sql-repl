@@ -57,7 +57,7 @@ const setupConnection = () => {
 
 <style lang="scss" scoped>
 .actions--btn {
-  @apply flex justify-center items-center focus:outline-transparent;
+  @apply flex-center focus:outline-transparent;
   @apply text-true-gray-700 dark:text-true-gray-300 hover:text-light-blue-400;
 }
 </style>

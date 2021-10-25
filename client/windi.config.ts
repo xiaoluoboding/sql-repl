@@ -6,6 +6,9 @@ export default defineConfig({
   darkMode: 'class',
   plugins: [typography()],
   attributify: true,
+  shortcuts: {
+    'flex-center': 'flex justify-center items-center'
+  },
   theme: {
     extend: {
       typography: {

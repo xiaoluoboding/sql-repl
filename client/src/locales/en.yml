@@ -17,6 +17,8 @@ button:
   run_sql_queries: Run SQL Queries（⌘E）
   save_sql_queries: Save SQL Queries（⌘S）
   copy-sql-queries: Copy SQL Queries
+  copy-table-result: Copy Table Result to Clipboard
+  export-to-csv: Export Table Result to CSV File
 modal:
   save_title: Save SQL Queries
   save_placeholder: SQL Queries Alias Name

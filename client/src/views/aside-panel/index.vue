@@ -49,7 +49,7 @@ const asideStore = useAsideStore()
     @apply  w-12 h-full border-r border-$border-color;
     @apply bg-blue-gray-100 dark:bg-dark-400;
     .actions {
-      @apply flex items-center justify-center flex-col space-y-4 py-4;
+      @apply flex-center flex-col space-y-4 py-4;
     }
   }
 
