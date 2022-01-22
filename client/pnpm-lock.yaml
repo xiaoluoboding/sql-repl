@@ -25,7 +25,7 @@ specifiers:
   keymaster: ^1.6.2
   naive-ui: ^2.19.3
   papaparse: ^5.3.1
-  pinia: ^2.0.0-rc.13
+  pinia: ^2.0.4
   sass: ^1.42.1
   sequelize: ^6.6.5
   splitpanes: ^3.0.6
@@ -54,7 +54,7 @@ dependencies:
   keymaster: 1.6.2
   naive-ui: 2.19.5_vue@3.2.20
   papaparse: 5.3.1
-  pinia: 2.0.0-rc.13_typescript@4.4.3+vue@3.2.20
+  pinia: 2.0.4_typescript@4.4.3+vue@3.2.20
   sequelize: 6.6.5
   splitpanes: 3.0.6
   vue: 3.2.20
@@ -749,6 +749,10 @@ packages:
 
   /@vue/devtools-api/6.0.0-beta.19:
     resolution: {integrity: sha512-ObzQhgkoVeoyKv+e8+tB/jQBL2smtk/NmC9OmFK8UqdDpoOdv/Kf9pyDWL+IFyM7qLD2C75rszJujvGSPSpGlw==}
+    dev: false
+
+  /@vue/devtools-api/6.0.0-beta.20.1:
+    resolution: {integrity: sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q==}
     dev: false
 
   /@vue/reactivity/3.2.20:
@@ -1761,11 +1765,11 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /pinia/2.0.0-rc.13_typescript@4.4.3+vue@3.2.20:
-    resolution: {integrity: sha512-NLOqK+tCIx1a4qZByqLZVdAK7ilTxkG6Opmj1O8hTjxpu4VSO2+eL2pPcO3JE/4ifZ6FBx87X2DU7NTY36z7Bw==}
+  /pinia/2.0.4_typescript@4.4.3+vue@3.2.20:
+    resolution: {integrity: sha512-nAc2f9HmOcBbWRlnGDuBGedM1G6uFAR10FnJWP1/dgm1I2tM5jbgKL/3IgynP4mBnPCy//ky7g0WpCZl5Mmxsg==}
     peerDependencies:
-      '@vue/composition-api': ^1.2.4
-      typescript: ^4.4.3
+      '@vue/composition-api': ^1.4.0
+      typescript: ^4.4.4
       vue: ^2.6.14 || ^3.2.0
     peerDependenciesMeta:
       '@vue/composition-api':
@@ -1773,7 +1777,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@vue/devtools-api': 6.0.0-beta.19
+      '@vue/devtools-api': 6.0.0-beta.20.1
       typescript: 4.4.3
       vue: 3.2.20
       vue-demi: 0.11.4_vue@3.2.20

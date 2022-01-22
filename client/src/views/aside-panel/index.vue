@@ -18,7 +18,7 @@
         </button>
       </div>
     </div>
-    <div class="aside-menu--content relative w-full">
+    <div class="aside-menu--content relative w-full h-full">
       <KeepAlive>
         <template v-if="asideStore.activeMenu === 'connections'">
           <Connections />

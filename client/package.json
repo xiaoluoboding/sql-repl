@@ -1,8 +1,8 @@
 {
   "name": "sql-repl",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3310",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview"
   },
@@ -21,7 +21,7 @@
     "keymaster": "^1.6.2",
     "naive-ui": "^2.19.3",
     "papaparse": "^5.3.1",
-    "pinia": "^2.0.0-rc.13",
+    "pinia": "^2.0.4",
     "sequelize": "^6.6.5",
     "splitpanes": "^3.0.6",
     "vue": "^3.2.13",

@@ -1,6 +1,6 @@
 <template>
   <h1
-    class="p-1 px-4 border-b border-$border-color font-semibold"
+    class="p-1 px-4 mb-4 border-b border-$border-color font-semibold"
     bg="blue-gray-100 dark:dark-400"
     text="gray-700 dark:true-gray-200"
   >
@@ -8,9 +8,10 @@
   </h1>
   <div
     v-if="replStore.dbSchemaTree && replStore.dbSchemaTree.length > 0"
-    class="aside-menu--tablecols p-4"
+    class="aside-menu--connection-tree px-4"
   >
     <NTree
+      class="h-[calc(100vh-176px)] overflow-y-auto"
       block-line
       :data="replStore.dbSchemaTree"
       :default-expanded-keys="replStore.expandedKeys"

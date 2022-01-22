@@ -7,14 +7,14 @@
   >
     <NMessageProvider>
       <Header />
-      <Splitpanes class="default-theme">
+      <Splitpanes class="default-theme repl-container">
         <Pane size="20" min-size="0" max-size="30">
           <AsidePanel />
         </Pane>
         <Pane size="80">
           <QuerySelector />
           <template v-if="hasTabs">
-            <Splitpanes horizontal class="default-theme" :key="tabsStore.activeTab.id">
+            <Splitpanes horizontal class="default-theme repl-content" :key="tabsStore.activeTab.id">
               <Pane size="50">
                 <ReplEditor />
               </Pane>
@@ -80,6 +80,7 @@ body {
   margin: 0;
   --base: #444;
   --nav-height: 48px;
+  --query-selector-height: 32px;
   --font-code: 'Source Code Pro', monospace;
   --color-branding: #38bdf8;
   --color-branding-dark: #416f9c;
@@ -87,8 +88,11 @@ body {
   @apply bg-gray-100 dark:bg-gray-900;
 }
 
-.repl-wrapper {
-  height: calc(100vh - var(--nav-height));
+.repl-container {
+  height: calc(100vh - var(--nav-height)) !important;
+}
+.repl-content {
+  height: calc(100% - var(--query-selector-height)) !important;
 }
 
 #app {
